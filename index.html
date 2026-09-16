@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sudharsan Fireworks — Sivakasi Crackers Price List</title>
-<meta name="description" content="Diwali crackers price list and ordering page. Fully editable — open Settings to change shop details and the price list.">
+<title>Sri Lakshmi Fireworks — Sivakasi Crackers Price List</title>
+<meta name="description" content="Order Diwali crackers online — choose quantities, pay by UPI, and get parcels delivered. Admin can edit everything from a password-protected settings panel.">
 <style id="app-style">
   :root{
     --bg:#fff6e8;
@@ -151,19 +151,32 @@
   .cat-count{font-size:.78rem;color:var(--text-dim);}
   .item-grid{display:grid;gap:10px;}
   .item-card{
-    display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center;
+    display:flex;flex-direction:column;gap:10px;
     background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:13px 16px;
   }
+  .item-top{display:flex;justify-content:space-between;gap:14px;}
   .item-name{font-weight:700;font-size:.97rem;}
-  .item-unit{font-size:.78rem;color:var(--text-dim);grid-column:1;}
-  .item-price{grid-row:1 / span 2;justify-self:end;text-align:right;}
+  .item-unit{font-size:.78rem;color:var(--text-dim);margin-top:2px;}
+  .item-price{text-align:right;flex-shrink:0;}
   .price-mrp{font-size:.78rem;color:var(--text-dim);text-decoration:line-through;}
   .price-net{font-size:1.15rem;font-weight:800;color:var(--accent-2);}
   .price-off{
     display:inline-block;margin-top:2px;font-size:.68rem;font-weight:700;
     padding:2px 7px;border-radius:999px;background:var(--surface-2);color:var(--accent-3);
   }
+  .qty-row{display:flex;align-items:center;gap:8px;border-top:1px dashed var(--border);padding-top:10px;}
+  .qty-btn{
+    width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+    background:var(--surface-2);color:var(--text);font-size:1.05rem;font-weight:700;
+    cursor:pointer;line-height:1;flex-shrink:0;
+  }
+  .qty-btn:hover{border-color:var(--accent);}
+  .qty-input{
+    width:46px;text-align:center;padding:6px 4px;border-radius:8px;
+    border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit;font-size:.9rem;
+  }
+  .line-total{margin-left:auto;font-weight:800;color:var(--accent-2);font-size:.92rem;}
 
   /* legal strip */
   .legal{
@@ -174,11 +187,16 @@
   .legal p{margin:0;font-size:.82rem;color:var(--text-dim);line-height:1.5;}
 
   /* footer */
-  footer{border-top:1px solid var(--border);padding-block:28px 100px;margin-top:10px;}
+  footer{border-top:1px solid var(--border);padding-block:28px 140px;margin-top:10px;}
   .foot-grid{display:grid;gap:18px;grid-template-columns:1.3fr 1fr;}
   .foot-title{font-weight:700;font-size:.95rem;margin-bottom:6px;}
   .foot-line{font-size:.85rem;color:var(--text-dim);line-height:1.6;}
   @media (max-width:520px){ .foot-grid{grid-template-columns:1fr;} }
+  .foot-admin{margin-top:22px;}
+  .admin-link{
+    background:none;border:none;padding:0;color:var(--text-dim);font-size:.72rem;
+    text-decoration:underline;cursor:pointer;
+  }
 
   /* floating whatsapp */
   .fab{
@@ -187,9 +205,22 @@
     background:#25d366;color:#04220f;border-radius:999px;
     padding:12px 16px;font-weight:700;font-size:.85rem;text-decoration:none;
     box-shadow:0 10px 26px -8px rgba(0,0,0,0.4);
+    transition:bottom .2s ease;
   }
+  body.has-cartbar .fab{ bottom:82px; }
 
-  /* settings drawer */
+  /* cart bar */
+  .cartbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:45;
+    background:var(--surface);border-top:1px solid var(--border);
+    box-shadow:0 -10px 26px -14px rgba(0,0,0,.3);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .cartbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;}
+  .cartbar-info{font-size:.9rem;}
+  .cartbar-info strong{font-size:1rem;}
+
+  /* settings / checkout drawer */
   .backdrop{
     position:fixed;inset:0;background:rgba(15,8,12,.45);z-index:60;
   }
@@ -235,21 +266,44 @@
   .drawer-foot{
     padding:14px 18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px;flex-shrink:0;
   }
-  .drawer-foot-row{display:flex;gap:10px;}
+  .drawer-foot-row{display:flex;gap:8px;flex-wrap:wrap;}
   .btn-save{
     flex:1;background:var(--accent);color:var(--accent-ink);border:none;
-    padding:12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:.92rem;
+    padding:12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:.9rem;
   }
+  .btn-save:disabled{opacity:.6;cursor:default;}
   .btn-cancel{
     background:transparent;border:1px solid var(--border);color:var(--text);
-    padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:600;
+    padding:12px 14px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.88rem;
   }
   .btn-download{
     background:var(--surface-2);border:1px solid var(--border);color:var(--text);
-    padding:11px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;
+    padding:11px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.82rem;
   }
   .save-hint{font-size:.72rem;color:var(--text-dim);line-height:1.45;}
   .remove-cat{color:var(--accent-2);}
+
+  /* checkout specifics */
+  .checkout-summary{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface-2);margin-bottom:16px;}
+  .checkout-line{display:flex;justify-content:space-between;gap:10px;font-size:.86rem;padding-block:4px;}
+  .checkout-total{border-top:1px solid var(--border);margin-top:6px;padding-top:8px;font-weight:800;font-size:.98rem;}
+  .upi-block{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface-2);margin-top:6px;}
+  .upi-qr-preview{max-width:160px;border-radius:10px;border:1px solid var(--border);display:block;margin-bottom:10px;}
+  .upi-id-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;}
+  .confirm{text-align:center;padding-block:30px;}
+  .confirm-icon{font-size:2.4rem;margin-bottom:10px;}
+  .confirm h3{font-size:1.2rem;margin-bottom:8px;}
+  .confirm p{color:var(--text-dim);font-size:.92rem;line-height:1.5;}
+
+  /* admin modal */
+  .modal{
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:62;
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:20px;width:min(360px,90vw);box-shadow:var(--shadow);
+  }
+  .modal h2{font-size:1.05rem;margin-bottom:8px;}
+  .modal-actions{display:flex;gap:10px;margin-top:14px;}
+  .modal-actions .btn-save{flex:1;}
 
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
@@ -260,13 +314,65 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
 </head>
 <body>
+
 <div id="root"></div>
-<script id="data-script">window.__DATA__ = {"shopName":"Sudharsan Fireworks","tagline":"Direct from Sivakasi · Since 1998","phone":"+91 98765 43210","whatsapp":"919876543210","address":"142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123","hours":"Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)","license":"PESO License No. TN/SVK/2024/00789","offerText":"Diwali Mega Sale","offerSubtext":"Flat 50% off on printed MRP, plus an extra 5% on prepaid orders above ₹5,000.","legalNote":"Sale subject to Explosives Rules, 2008 and local municipal timing restrictions. Fireworks are collected in person at our Sivakasi depot or a nearby partner counter — courier or air transport of crackers is not permitted by law. Please handle and burst crackers only in open spaces, away from children, under adult supervision.","categories":[{"name":"Sparklers","items":[{"name":"Electric Sparklers 7cm","unit":"Box of 10","mrp":60,"price":30},{"name":"Electric Sparklers 10cm","unit":"Box of 10","mrp":90,"price":45},{"name":"Colour Sparklers 12cm","unit":"Box of 5","mrp":120,"price":60}]},{"name":"Flower Pots","items":[{"name":"Flower Pot – Small","unit":"Piece","mrp":35,"price":18},{"name":"Flower Pot – Medium","unit":"Piece","mrp":70,"price":35},{"name":"Flower Pot – Deluxe Musical","unit":"Piece","mrp":150,"price":75}]},{"name":"Ground Chakkars","items":[{"name":"Chakkar – Regular","unit":"Piece","mrp":25,"price":12},{"name":"Chakkar – Deluxe Wire","unit":"Piece","mrp":45,"price":22}]},{"name":"Rockets","items":[{"name":"Rain Rocket","unit":"Piece","mrp":40,"price":20},{"name":"Sky Shot Rocket – 8 Sound","unit":"Piece","mrp":180,"price":90}]},{"name":"Sound Crackers","items":[{"name":"Lakshmi Crackers – Small","unit":"Bundle of 10","mrp":50,"price":25},{"name":"Ashoka Deluxe – Big","unit":"Bundle of 10","mrp":400,"price":200}]},{"name":"Aerial Shots","items":[{"name":"30 Shots Colour Cake","unit":"Piece","mrp":900,"price":450},{"name":"60 Shots Multi Cake","unit":"Piece","mrp":1800,"price":900}]},{"name":"Gift Boxes","items":[{"name":"Family Gift Box – 45 items","unit":"Box","mrp":2500,"price":1250},{"name":"Deluxe Diwali Hamper – 80 items","unit":"Box","mrp":5000,"price":2500}]}]};</script>
+
+<script id="data-script">
+window.__DATA__ = {
+  shopName: "Sri Lakshmi Fireworks",
+  tagline: "Direct from Sivakasi · Since 1998",
+  phone: "+91 98765 43210",
+  whatsapp: "919876543210",
+  address: "142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123",
+  hours: "Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)",
+  license: "PESO License No. TN/SVK/2024/00789",
+  offerText: "Diwali Mega Sale",
+  offerSubtext: "Flat 50% off on printed MRP, plus an extra 5% on prepaid orders above ₹5,000.",
+  legalNote: "Sale subject to Explosives Rules, 2008 and local municipal timing restrictions. Fireworks are dispatched as a parcel to the address you provide, where permitted — please check local rules before ordering. Handle and burst crackers only in open spaces, away from children, under adult supervision.",
+  ownerEmail: "owner@example.com",
+  upi: { id: "shopname@okhdfcbank", payeeName: "Sri Lakshmi Fireworks", qrImage: "" },
+  email: { serviceId: "", templateId: "", publicKey: "" },
+  adminPassword: "admin123",
+  categories: [
+    { name: "Sparklers", items: [
+      { name: "Electric Sparklers 7cm", unit: "Box of 10", mrp: 60, price: 30 },
+      { name: "Electric Sparklers 10cm", unit: "Box of 10", mrp: 90, price: 45 },
+      { name: "Colour Sparklers 12cm", unit: "Box of 5", mrp: 120, price: 60 }
+    ]},
+    { name: "Flower Pots", items: [
+      { name: "Flower Pot – Small", unit: "Piece", mrp: 35, price: 18 },
+      { name: "Flower Pot – Medium", unit: "Piece", mrp: 70, price: 35 },
+      { name: "Flower Pot – Deluxe Musical", unit: "Piece", mrp: 150, price: 75 }
+    ]},
+    { name: "Ground Chakkars", items: [
+      { name: "Chakkar – Regular", unit: "Piece", mrp: 25, price: 12 },
+      { name: "Chakkar – Deluxe Wire", unit: "Piece", mrp: 45, price: 22 }
+    ]},
+    { name: "Rockets", items: [
+      { name: "Rain Rocket", unit: "Piece", mrp: 40, price: 20 },
+      { name: "Sky Shot Rocket – 8 Sound", unit: "Piece", mrp: 180, price: 90 }
+    ]},
+    { name: "Sound Crackers", items: [
+      { name: "Lakshmi Crackers – Small", unit: "Bundle of 10", mrp: 50, price: 25 },
+      { name: "Ashoka Deluxe – Big", unit: "Bundle of 10", mrp: 400, price: 200 }
+    ]},
+    { name: "Aerial Shots", items: [
+      { name: "30 Shots Colour Cake", unit: "Piece", mrp: 900, price: 450 },
+      { name: "60 Shots Multi Cake", unit: "Piece", mrp: 1800, price: 900 }
+    ]},
+    { name: "Gift Boxes", items: [
+      { name: "Family Gift Box – 45 items", unit: "Box", mrp: 2500, price: 1250 },
+      { name: "Deluxe Diwali Hamper – 80 items", unit: "Box", mrp: 5000, price: 2500 }
+    ]}
+  ]
+};
+</script>
 <script id="app-script">
 (function(){
   "use strict";
 
   var STORAGE_KEY = "crackersShopData";
+  var cart = {}; // key: "ci_ii" -> qty
 
   function esc(s){
     return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
@@ -283,9 +389,8 @@
     if(mrp<=0 || price>=mrp) return 0;
     return Math.round((1 - price/mrp)*100);
   }
-
-  function waLink(data){
-    var msg = "Hi " + data.shopName + ", I would like to enquire about your crackers price list.";
+  function waLink(data, text){
+    var msg = text || ("Hi " + data.shopName + ", I would like to enquire about your crackers price list.");
     return "https://wa.me/" + (data.whatsapp||"").replace(/[^0-9]/g,"") + "?text=" + encodeURIComponent(msg);
   }
   function telLink(data){
@@ -304,6 +409,8 @@
     catch(e){ return false; }
   }
 
+  /* ================= public page render ================= */
+
   function renderQuickNav(data){
     return data.categories.map(function(c,i){
       return '<a class="chip" href="#'+slug(c.name,i)+'">'+esc(c.name)+'</a>';
@@ -311,17 +418,24 @@
   }
 
   function renderCategory(c,i){
-    var items = (c.items||[]).map(function(it){
+    var items = (c.items||[]).map(function(it,ii){
       var off = pctOff(it.mrp, it.price);
       return '' +
-        '<div class="item-card">' +
-          '<div class="item-name">'+esc(it.name)+'</div>' +
-          '<div class="item-price">' +
-            (off>0 ? '<div class="price-mrp tabular">'+money(it.mrp)+'</div>' : '') +
-            '<div class="price-net tabular">'+money(it.price)+'</div>' +
-            (off>0 ? '<span class="price-off">'+off+'% OFF</span>' : '') +
+        '<div class="item-card" data-cat="'+i+'" data-item="'+ii+'">' +
+          '<div class="item-top">' +
+            '<div><div class="item-name">'+esc(it.name)+'</div><div class="item-unit">'+esc(it.unit||"")+'</div></div>' +
+            '<div class="item-price">' +
+              (off>0 ? '<div class="price-mrp tabular">'+money(it.mrp)+'</div>' : '') +
+              '<div class="price-net tabular">'+money(it.price)+'</div>' +
+              (off>0 ? '<span class="price-off">'+off+'% OFF</span>' : '') +
+            '</div>' +
           '</div>' +
-          '<div class="item-unit">'+esc(it.unit||"")+'</div>' +
+          '<div class="qty-row">' +
+            '<button type="button" class="qty-btn qty-minus" aria-label="Decrease quantity">−</button>' +
+            '<input type="number" min="0" inputmode="numeric" class="qty-input" value="0" aria-label="Quantity for '+esc(it.name)+'">' +
+            '<button type="button" class="qty-btn qty-plus" aria-label="Increase quantity">+</button>' +
+            '<span class="line-total tabular" hidden></span>' +
+          '</div>' +
         '</div>';
     }).join("");
     return '' +
@@ -341,7 +455,6 @@
       '</div>' +
       '<div class="top-actions">' +
         '<a class="call-chip" href="'+telLink(data)+'" aria-label="Call the shop">☎️ Call</a>' +
-        '<button class="icon-btn" id="settingsBtn" aria-label="Open settings" title="Settings">⚙️</button>' +
       '</div>' +
     '</div></div>' +
 
@@ -353,9 +466,9 @@
         '<h1>Diwali crackers, straight from the Sivakasi factories.</h1>' +
         '<p class="hero-offer-sub">'+esc(data.offerSubtext||"")+'</p>' +
         '<div class="hero-ctas">' +
-          '<a class="cta cta-whatsapp" href="'+waLink(data)+'" target="_blank" rel="noopener">Order on WhatsApp</a>' +
+          '<a class="cta cta-whatsapp" href="'+waLink(data)+'" target="_blank" rel="noopener">Ask on WhatsApp</a>' +
           '<a class="cta cta-primary" href="'+telLink(data)+'">Call to Order</a>' +
-          '<a class="cta cta-ghost" href="#pricelist">View Price List</a>' +
+          '<a class="cta cta-ghost" href="#pricelist">Choose items below</a>' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -369,23 +482,36 @@
       '</div>' +
     '</div>' +
 
-    '<footer><div class="wrap foot-grid">' +
-      '<div>' +
-        '<div class="foot-title">Visit the shop</div>' +
-        '<div class="foot-line">'+esc(data.address)+'</div>' +
-        '<div class="foot-line">'+esc(data.hours)+'</div>' +
+    '<footer><div class="wrap">' +
+      '<div class="foot-grid">' +
+        '<div>' +
+          '<div class="foot-title">Visit or write to us</div>' +
+          '<div class="foot-line">'+esc(data.address)+'</div>' +
+          '<div class="foot-line">'+esc(data.hours)+'</div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="foot-title">Contact</div>' +
+          '<div class="foot-line"><a href="'+telLink(data)+'">'+esc(data.phone)+'</a></div>' +
+          '<div class="foot-line"><a href="'+waLink(data)+'" target="_blank" rel="noopener">WhatsApp us</a></div>' +
+        '</div>' +
       '</div>' +
-      '<div>' +
-        '<div class="foot-title">Contact</div>' +
-        '<div class="foot-line"><a href="'+telLink(data)+'">'+esc(data.phone)+'</a></div>' +
-        '<div class="foot-line"><a href="'+waLink(data)+'" target="_blank" rel="noopener">WhatsApp us</a></div>' +
-      '</div>' +
+      '<div class="foot-admin"><button type="button" class="admin-link" id="adminLoginBtn">Shop admin</button></div>' +
     '</div></footer>' +
 
-    '<a class="fab" href="'+waLink(data)+'" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬 WhatsApp Order</a>';
+    '<a class="fab" href="'+waLink(data)+'" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬 WhatsApp</a>' +
+
+    '<div class="cartbar" id="cartBar" hidden>' +
+      '<div class="wrap cartbar-inner">' +
+        '<div class="cartbar-info"><strong id="cartCount">0</strong> items · <span id="cartTotal" class="tabular">₹0</span></div>' +
+        '<button type="button" class="cta cta-primary" id="checkoutBtn">Checkout</button>' +
+      '</div>' +
+    '</div>';
 
     root.innerHTML = html;
+    cart = {};
+    updateCartBar();
     startFireworks(document.getElementById("fxCanvas"));
+    wirePriceListEvents();
   }
 
   /* ---------- ambient fireworks canvas ---------- */
@@ -446,7 +572,234 @@
     }
   }
 
-  /* ---------- settings drawer ---------- */
+  /* ================= cart / ordering ================= */
+
+  function wirePriceListEvents(){
+    var list = document.getElementById("pricelist");
+    list.addEventListener("click", function(e){
+      var minus = e.target.closest(".qty-minus");
+      var plus = e.target.closest(".qty-plus");
+      if(!minus && !plus) return;
+      var card = e.target.closest(".item-card");
+      var input = card.querySelector(".qty-input");
+      var val = parseInt(input.value,10)||0;
+      val = plus ? val+1 : Math.max(0, val-1);
+      input.value = val;
+      applyQty(card, val);
+    });
+    list.addEventListener("change", function(e){
+      if(!e.target.classList.contains("qty-input")) return;
+      var card = e.target.closest(".item-card");
+      var val = Math.max(0, parseInt(e.target.value,10)||0);
+      e.target.value = val;
+      applyQty(card, val);
+    });
+  }
+
+  function applyQty(card, val){
+    var ci = card.getAttribute("data-cat"), ii = card.getAttribute("data-item");
+    var key = ci+"_"+ii;
+    if(val>0) cart[key]=val; else delete cart[key];
+    var item = window.__DATA__.categories[ci].items[ii];
+    var lineEl = card.querySelector(".line-total");
+    if(val>0){ lineEl.hidden=false; lineEl.textContent = money(val*item.price); }
+    else { lineEl.hidden=true; }
+    updateCartBar();
+  }
+
+  function getCartItems(){
+    var items = [];
+    Object.keys(cart).forEach(function(k){
+      var parts = k.split("_"); var ci=parts[0], ii=parts[1];
+      var cat = window.__DATA__.categories[ci];
+      if(!cat) return;
+      var it = cat.items[ii];
+      if(!it) return;
+      var qty = cart[k];
+      items.push({name:it.name, unit:it.unit, price:it.price, qty:qty, lineTotal:qty*it.price});
+    });
+    return items;
+  }
+  function getCartCount(){
+    return Object.keys(cart).reduce(function(s,k){ return s+cart[k]; },0);
+  }
+  function getCartTotal(){
+    return getCartItems().reduce(function(s,it){ return s+it.lineTotal; },0);
+  }
+
+  function updateCartBar(){
+    var count = getCartCount();
+    var bar = document.getElementById("cartBar");
+    if(!bar) return;
+    if(count>0){
+      bar.hidden = false;
+      document.getElementById("cartCount").textContent = count;
+      document.getElementById("cartTotal").textContent = money(getCartTotal());
+      document.body.classList.add("has-cartbar");
+    } else {
+      bar.hidden = true;
+      document.body.classList.remove("has-cartbar");
+    }
+  }
+
+  function resetCart(){
+    cart = {};
+    document.querySelectorAll("#pricelist .qty-input").forEach(function(inp){ inp.value = 0; });
+    document.querySelectorAll("#pricelist .line-total").forEach(function(el){ el.hidden = true; });
+    updateCartBar();
+  }
+
+  function buildOrderSummaryText(order){
+    var lines = order.items.map(function(it){
+      return it.name + " (" + (it.unit||"") + ") x" + it.qty + " = " + money(it.lineTotal);
+    }).join("\n");
+    return "Order from: " + order.name + "\nPhone: " + order.phone + "\nDelivery address: " + order.address +
+      "\n\nItems:\n" + lines + "\n\nTotal: " + money(order.total) +
+      "\nUPI reference: " + (order.upiRef || "(not provided)");
+  }
+
+  function ensureEmailJsLoaded(){
+    return new Promise(function(resolve,reject){
+      if(window.emailjs){ resolve(); return; }
+      var s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+      s.onload = function(){ resolve(); };
+      s.onerror = function(){ reject(new Error("failed to load email service")); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function sendOrder(order){
+    var data = window.__DATA__;
+    var cfg = data.email || {};
+    if(cfg.serviceId && cfg.templateId && cfg.publicKey){
+      return ensureEmailJsLoaded().then(function(){
+        window.emailjs.init(cfg.publicKey);
+        return window.emailjs.send(cfg.serviceId, cfg.templateId, {
+          to_email: data.ownerEmail || "",
+          shop_name: data.shopName || "",
+          customer_name: order.name,
+          customer_phone: order.phone,
+          customer_address: order.address,
+          order_summary: buildOrderSummaryText(order),
+          order_total: order.total,
+          upi_ref: order.upiRef || ""
+        });
+      }).then(function(){
+        return {ok:true, method:"email"};
+      }).catch(function(){
+        openMailtoFallback(order, data);
+        return {ok:true, method:"mailto"};
+      });
+    }
+    openMailtoFallback(order, data);
+    return Promise.resolve({ok:true, method:"mailto"});
+  }
+
+  function openMailtoFallback(order, data){
+    var subject = encodeURIComponent("New order from " + order.name);
+    var body = encodeURIComponent(buildOrderSummaryText(order));
+    window.open("mailto:" + (data.ownerEmail||"") + "?subject=" + subject + "&body=" + body, "_blank");
+  }
+
+  /* ---------- checkout drawer ---------- */
+
+  function openCheckout(){
+    if(getCartCount()===0){ alert("Please choose at least one item first."); return; }
+    renderCheckoutBody();
+    document.getElementById("checkoutBackdrop").hidden = false;
+    document.getElementById("checkoutDrawer").hidden = false;
+  }
+  function closeCheckout(){
+    document.getElementById("checkoutBackdrop").hidden = true;
+    document.getElementById("checkoutDrawer").hidden = true;
+  }
+
+  function renderCheckoutBody(){
+    var data = window.__DATA__;
+    var items = getCartItems();
+    var total = items.reduce(function(s,it){ return s+it.lineTotal; },0);
+    var itemsHtml = items.map(function(it){
+      return '<div class="checkout-line"><span>'+esc(it.name)+' × '+it.qty+'</span><span class="tabular">'+money(it.lineTotal)+'</span></div>';
+    }).join("");
+    var upi = data.upi || {};
+    var upiHtml = "";
+    if(upi.id){
+      upiHtml = '' +
+        '<div class="upi-block">' +
+          '<div class="section-label" style="margin-top:0;">Pay via UPI</div>' +
+          (upi.qrImage ? '<img class="upi-qr-preview" src="'+upi.qrImage+'" alt="UPI QR code">' : "") +
+          '<div class="upi-id-row"><span class="tabular">'+esc(upi.id)+'</span><button type="button" class="mini-btn" id="copyUpiBtn">Copy</button></div>' +
+          (upi.payeeName ? '<div class="foot-line" style="margin-top:6px;">Payee: '+esc(upi.payeeName)+'</div>' : "") +
+          '<p class="save-hint" style="margin-top:8px;">Pay '+money(total)+' to the UPI ID above, then add your transaction reference below so we can confirm it faster.</p>' +
+          '<div class="field" style="margin-top:10px;margin-bottom:0;"><label for="ord-upiref">UPI transaction / reference ID</label><input id="ord-upiref" type="text" placeholder="e.g. 402913567890"></div>' +
+        '</div>';
+    }
+    document.getElementById("checkoutBody").innerHTML =
+      '<div class="section-label" style="margin-top:0;">Your order</div>' +
+      '<div class="checkout-summary">'+itemsHtml+'<div class="checkout-line checkout-total"><span>Total</span><span class="tabular">'+money(total)+'</span></div></div>' +
+      '<div class="section-label">Your details</div>' +
+      '<div class="field"><label for="ord-name">Full name</label><input id="ord-name" type="text" autocomplete="name"></div>' +
+      '<div class="field"><label for="ord-phone">Contact number</label><input id="ord-phone" type="tel" autocomplete="tel"></div>' +
+      '<div class="field"><label for="ord-address">Address to send the parcel</label><textarea id="ord-address" autocomplete="street-address"></textarea></div>' +
+      upiHtml;
+    document.getElementById("checkoutFoot").hidden = false;
+
+    var copyBtn = document.getElementById("copyUpiBtn");
+    if(copyBtn){
+      copyBtn.addEventListener("click", function(){
+        try{
+          navigator.clipboard.writeText(upi.id);
+          copyBtn.textContent = "Copied";
+          setTimeout(function(){ copyBtn.textContent = "Copy"; }, 1500);
+        }catch(e){ /* clipboard unavailable — ignore */ }
+      });
+    }
+  }
+
+  function showOrderConfirmation(order){
+    document.getElementById("checkoutBody").innerHTML =
+      '<div class="confirm">' +
+        '<div class="confirm-icon">🎆</div>' +
+        '<h3>Order sent!</h3>' +
+        '<p>Thanks '+esc(order.name)+', we’ve received your order for '+money(order.total)+'. We’ll confirm availability and delivery on '+esc(order.phone)+'.</p>' +
+      '</div>';
+    document.getElementById("checkoutFoot").hidden = true;
+  }
+
+  function submitOrder(via){
+    var name = document.getElementById("ord-name").value.trim();
+    var phone = document.getElementById("ord-phone").value.trim();
+    var address = document.getElementById("ord-address").value.trim();
+    var upiRefEl = document.getElementById("ord-upiref");
+    var upiRef = upiRefEl ? upiRefEl.value.trim() : "";
+    if(!name || !phone || !address){
+      alert("Please fill your name, contact number and delivery address.");
+      return;
+    }
+    var items = getCartItems();
+    if(items.length===0){ alert("Your cart is empty."); return; }
+    var total = items.reduce(function(s,it){ return s+it.lineTotal; },0);
+    var order = {name:name, phone:phone, address:address, upiRef:upiRef, items:items, total:total};
+
+    if(via === "whatsapp"){
+      window.open(waLink(window.__DATA__, buildOrderSummaryText(order)), "_blank");
+      showOrderConfirmation(order);
+      resetCart();
+      return;
+    }
+
+    var btn = document.getElementById("submitOrderBtn");
+    if(btn){ btn.disabled = true; btn.textContent = "Sending…"; }
+    sendOrder(order).then(function(){
+      showOrderConfirmation(order);
+      resetCart();
+    }).finally(function(){
+      if(btn){ btn.disabled = false; btn.textContent = "Submit order"; }
+    });
+  }
+
+  /* ================= settings (admin) ================= */
   var draft = null;
 
   function cloneData(d){ return JSON.parse(JSON.stringify(d)); }
@@ -461,7 +814,6 @@
         '<button type="button" class="row-btn remove-item" title="Remove item">✕</button>' +
       '</div>';
   }
-
   function catEditor(cat, catIndex){
     var rows = (cat.items||[]).map(function(it,ii){ return itemRow(catIndex, ii, it); }).join("");
     return '' +
@@ -474,10 +826,14 @@
         '<button type="button" class="add-btn add-item" data-cat="'+catIndex+'">+ Add item</button>' +
       '</div>';
   }
-
   function renderCatEditors(){
-    var host = document.getElementById("catEditorHost");
-    host.innerHTML = draft.categories.map(catEditor).join("");
+    document.getElementById("catEditorHost").innerHTML = draft.categories.map(catEditor).join("");
+  }
+
+  function updateUpiPreview(){
+    var img = document.getElementById("upiQrPreview");
+    if(draft.upi && draft.upi.qrImage){ img.src = draft.upi.qrImage; img.hidden = false; }
+    else { img.hidden = true; img.removeAttribute("src"); }
   }
 
   function fillForm(){
@@ -491,6 +847,14 @@
     document.getElementById("f-offerText").value = draft.offerText||"";
     document.getElementById("f-offerSubtext").value = draft.offerSubtext||"";
     document.getElementById("f-legalNote").value = draft.legalNote||"";
+    document.getElementById("f-ownerEmail").value = draft.ownerEmail||"";
+    document.getElementById("f-upiId").value = (draft.upi&&draft.upi.id)||"";
+    document.getElementById("f-upiPayee").value = (draft.upi&&draft.upi.payeeName)||"";
+    document.getElementById("f-emailService").value = (draft.email&&draft.email.serviceId)||"";
+    document.getElementById("f-emailTemplate").value = (draft.email&&draft.email.templateId)||"";
+    document.getElementById("f-emailPublicKey").value = (draft.email&&draft.email.publicKey)||"";
+    document.getElementById("f-adminPassword").value = draft.adminPassword||"";
+    updateUpiPreview();
     renderCatEditors();
   }
 
@@ -505,6 +869,16 @@
     draft.offerText = document.getElementById("f-offerText").value.trim();
     draft.offerSubtext = document.getElementById("f-offerSubtext").value.trim();
     draft.legalNote = document.getElementById("f-legalNote").value.trim();
+    draft.ownerEmail = document.getElementById("f-ownerEmail").value.trim();
+    draft.upi = draft.upi || {};
+    draft.upi.id = document.getElementById("f-upiId").value.trim();
+    draft.upi.payeeName = document.getElementById("f-upiPayee").value.trim();
+    draft.email = {
+      serviceId: document.getElementById("f-emailService").value.trim(),
+      templateId: document.getElementById("f-emailTemplate").value.trim(),
+      publicKey: document.getElementById("f-emailPublicKey").value.trim()
+    };
+    draft.adminPassword = document.getElementById("f-adminPassword").value.trim() || draft.adminPassword || "admin123";
   }
 
   function readCategoriesFromDOM(){
@@ -526,15 +900,15 @@
     draft.categories = cats;
   }
 
-  function openDrawer(){
+  function openSettingsDrawer(){
     draft = cloneData(window.__DATA__);
     fillForm();
-    document.getElementById("backdrop").hidden = false;
-    document.getElementById("drawer").hidden = false;
+    document.getElementById("settingsBackdrop").hidden = false;
+    document.getElementById("settingsDrawer").hidden = false;
   }
-  function closeDrawer(){
-    document.getElementById("backdrop").hidden = true;
-    document.getElementById("drawer").hidden = true;
+  function closeSettingsDrawer(){
+    document.getElementById("settingsBackdrop").hidden = true;
+    document.getElementById("settingsDrawer").hidden = true;
   }
 
   function escapeForScript(s){
@@ -550,7 +924,7 @@
       "<meta charset=\"UTF-8\">\n" +
       "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n" +
       "<title>" + esc(data.shopName) + " — Sivakasi Crackers Price List</title>\n" +
-      "<meta name=\"description\" content=\"Diwali crackers price list and ordering page. Fully editable — open Settings to change shop details and the price list.\">\n" +
+      "<meta name=\"description\" content=\"Order Diwali crackers online with UPI payment.\">\n" +
       styleEl.outerHTML + "\n" +
       "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
       "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
@@ -581,7 +955,7 @@
     readCategoriesFromDOM();
     window.__DATA__ = draft;
     render(draft);
-    closeDrawer();
+    closeSettingsDrawer();
 
     var savedLocally = persistData(draft);
     var downloaded = downloadHtml(draft, "index.html");
@@ -592,28 +966,25 @@
           (savedLocally ? "This browser will also keep showing your latest edits until you do." : ""));
       }, 300);
     } else if(savedLocally){
-      alert("Saved in this browser, but the automatic download did not start. Use your browser's \"Save As\" on this page after closing this dialog, or ask for the file another way.");
+      alert("Saved in this browser, but the automatic download did not start.");
     } else {
       alert("Could not save automatically. Your browser may be blocking local storage or downloads.");
     }
   }
-
   function downloadOnly(){
     readFormBasics();
     readCategoriesFromDOM();
     downloadHtml(draft, "index.html");
   }
 
-  function wireDrawerEvents(){
-    document.getElementById("settingsBtn").addEventListener("click", openDrawer);
-    document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
-    document.getElementById("cancelBtn").addEventListener("click", closeDrawer);
-    document.getElementById("backdrop").addEventListener("click", closeDrawer);
+  function wireSettingsEvents(){
+    document.getElementById("closeSettings").addEventListener("click", closeSettingsDrawer);
+    document.getElementById("cancelSettingsBtn").addEventListener("click", closeSettingsDrawer);
+    document.getElementById("settingsBackdrop").addEventListener("click", closeSettingsDrawer);
     document.getElementById("saveBtn").addEventListener("click", saveChanges);
     document.getElementById("downloadBtn").addEventListener("click", downloadOnly);
     document.getElementById("addCategoryBtn").addEventListener("click", function(){
-      readFormBasics();
-      readCategoriesFromDOM();
+      readFormBasics(); readCategoriesFromDOM();
       draft.categories.push({name:"New Category", items:[{name:"New Item", unit:"Piece", mrp:0, price:0}]});
       renderCatEditors();
     });
@@ -640,19 +1011,70 @@
         renderCatEditors();
       }
     });
-    document.addEventListener("keydown", function(e){
-      if(e.key === "Escape" && !document.getElementById("drawer").hidden) closeDrawer();
+    document.getElementById("f-upiQr").addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if(!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        draft.upi = draft.upi || {};
+        draft.upi.qrImage = ev.target.result;
+        updateUpiPreview();
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById("removeUpiQrBtn").addEventListener("click", function(){
+      draft.upi = draft.upi || {};
+      draft.upi.qrImage = "";
+      document.getElementById("f-upiQr").value = "";
+      updateUpiPreview();
     });
   }
 
-  function buildDrawerMarkup(){
+  /* ---------- admin login ---------- */
+  function openAdminModal(){
+    document.getElementById("adminPasswordInput").value = "";
+    document.getElementById("adminBackdrop").hidden = false;
+    document.getElementById("adminModal").hidden = false;
+    document.getElementById("adminPasswordInput").focus();
+  }
+  function closeAdminModal(){
+    document.getElementById("adminBackdrop").hidden = true;
+    document.getElementById("adminModal").hidden = true;
+  }
+  function tryAdminUnlock(){
+    var pw = document.getElementById("adminPasswordInput").value;
+    if(pw === (window.__DATA__.adminPassword || "admin123")){
+      closeAdminModal();
+      openSettingsDrawer();
+    } else {
+      alert("Incorrect password.");
+    }
+  }
+
+  /* ================= build overlay markup (once) ================= */
+  function buildOverlays(){
     var host = document.createElement("div");
     host.innerHTML = '' +
-      '<div class="backdrop" id="backdrop" hidden></div>' +
-      '<aside class="drawer" id="drawer" hidden role="dialog" aria-label="Shop settings">' +
-        '<div class="drawer-head"><h2>Shop settings</h2><button class="icon-btn" id="closeDrawer" aria-label="Close settings">✕</button></div>' +
+      /* checkout */
+      '<div class="backdrop" id="checkoutBackdrop" hidden></div>' +
+      '<aside class="drawer" id="checkoutDrawer" hidden role="dialog" aria-label="Complete your order">' +
+        '<div class="drawer-head"><h2>Complete your order</h2><button class="icon-btn" id="closeCheckout" aria-label="Close">✕</button></div>' +
+        '<div class="drawer-body" id="checkoutBody"></div>' +
+        '<div class="drawer-foot" id="checkoutFoot">' +
+          '<p class="save-hint">Submitting sends your order to the shop by email. You can also send it via WhatsApp instead.</p>' +
+          '<div class="drawer-foot-row">' +
+            '<button class="btn-cancel" id="cancelCheckoutBtn" type="button">Cancel</button>' +
+            '<button class="btn-download" id="whatsappOrderBtn" type="button">Send via WhatsApp</button>' +
+            '<button class="btn-save" id="submitOrderBtn" type="button">Submit order</button>' +
+          '</div>' +
+        '</div>' +
+      '</aside>' +
+      /* settings */
+      '<div class="backdrop" id="settingsBackdrop" hidden></div>' +
+      '<aside class="drawer" id="settingsDrawer" hidden role="dialog" aria-label="Shop settings">' +
+        '<div class="drawer-head"><h2>Shop settings</h2><button class="icon-btn" id="closeSettings" aria-label="Close settings">✕</button></div>' +
         '<div class="drawer-body">' +
-          '<div class="section-label">Shop details</div>' +
+          '<div class="section-label" style="margin-top:0;">Shop details</div>' +
           '<div class="field"><label for="f-shopName">Shop name</label><input id="f-shopName" type="text"></div>' +
           '<div class="field"><label for="f-tagline">Tagline</label><input id="f-tagline" type="text"></div>' +
           '<div class="field"><label for="f-phone">Phone (for Call button)</label><input id="f-phone" type="text" placeholder="+91 98765 43210"></div>' +
@@ -666,6 +1088,25 @@
           '<div class="field"><label for="f-offerSubtext">Offer description</label><textarea id="f-offerSubtext"></textarea></div>' +
           '<div class="field"><label for="f-legalNote">Safety / legal note</label><textarea id="f-legalNote"></textarea></div>' +
 
+          '<div class="section-label">Orders &amp; payment</div>' +
+          '<div class="field"><label for="f-ownerEmail">Order email address</label><input id="f-ownerEmail" type="email" placeholder="you@example.com"></div>' +
+          '<div class="field"><label for="f-upiId">UPI ID</label><input id="f-upiId" type="text" placeholder="shopname@okhdfcbank"></div>' +
+          '<div class="field"><label for="f-upiPayee">UPI payee name (shown to customers)</label><input id="f-upiPayee" type="text"></div>' +
+          '<div class="field">' +
+            '<label for="f-upiQr">UPI QR code image</label>' +
+            '<input id="f-upiQr" type="file" accept="image/*">' +
+            '<img id="upiQrPreview" class="upi-qr-preview" hidden alt="UPI QR preview" style="margin-top:8px;">' +
+            '<button type="button" class="mini-btn" id="removeUpiQrBtn" style="margin-top:6px;">Remove QR image</button>' +
+          '</div>' +
+          '<p class="save-hint">Optional — for orders to arrive automatically in your inbox instead of opening an email app, create a free account at emailjs.com, add an email service and a template, then paste the three IDs it gives you below.</p>' +
+          '<div class="field"><label for="f-emailService">EmailJS Service ID</label><input id="f-emailService" type="text"></div>' +
+          '<div class="field"><label for="f-emailTemplate">EmailJS Template ID</label><input id="f-emailTemplate" type="text"></div>' +
+          '<div class="field"><label for="f-emailPublicKey">EmailJS Public Key</label><input id="f-emailPublicKey" type="text"></div>' +
+
+          '<div class="section-label">Security</div>' +
+          '<div class="field"><label for="f-adminPassword">Admin password</label><input id="f-adminPassword" type="text"></div>' +
+          '<p class="save-hint">This hides settings from regular visitors, but this page has no real server — anyone who inspects the page’s code could still find this password. Don’t reuse an important password here.</p>' +
+
           '<div class="section-label">Categories &amp; price list</div>' +
           '<div id="catEditorHost"></div>' +
           '<button type="button" class="add-btn" id="addCategoryBtn">+ Add category</button>' +
@@ -673,21 +1114,65 @@
         '<div class="drawer-foot">' +
           '<p class="save-hint">This page is a static file, so "Save" updates what you see here and downloads an updated index.html — upload that file to your GitHub repo to make the change live for visitors.</p>' +
           '<div class="drawer-foot-row">' +
-            '<button class="btn-cancel" id="cancelBtn" type="button">Cancel</button>' +
-            '<button class="btn-download" id="downloadBtn" type="button" title="Download without closing">Download only</button>' +
+            '<button class="btn-cancel" id="cancelSettingsBtn" type="button">Cancel</button>' +
+            '<button class="btn-download" id="downloadBtn" type="button">Download only</button>' +
             '<button class="btn-save" id="saveBtn" type="button">Save &amp; download</button>' +
           '</div>' +
         '</div>' +
-      '</aside>';
+      '</aside>' +
+      /* admin login */
+      '<div class="backdrop" id="adminBackdrop" hidden></div>' +
+      '<div class="modal" id="adminModal" hidden role="dialog" aria-label="Admin login">' +
+        '<h2>Shop admin</h2>' +
+        '<p class="save-hint">Enter the admin password to edit shop details, products and prices.</p>' +
+        '<div class="field" style="margin-top:10px;margin-bottom:0;"><label for="adminPasswordInput">Password</label><input id="adminPasswordInput" type="password"></div>' +
+        '<div class="modal-actions">' +
+          '<button class="btn-cancel" id="adminCancelBtn" type="button">Cancel</button>' +
+          '<button class="btn-save" id="adminUnlockBtn" type="button">Unlock</button>' +
+        '</div>' +
+      '</div>';
     while(host.firstChild) document.body.appendChild(host.firstChild);
   }
+
+  function wireOverlayEvents(){
+    document.getElementById("adminLoginBtn").addEventListener("click", openAdminModal);
+    document.getElementById("adminCancelBtn").addEventListener("click", closeAdminModal);
+    document.getElementById("adminBackdrop").addEventListener("click", closeAdminModal);
+    document.getElementById("adminUnlockBtn").addEventListener("click", tryAdminUnlock);
+    document.getElementById("adminPasswordInput").addEventListener("keydown", function(e){
+      if(e.key === "Enter") tryAdminUnlock();
+    });
+
+    document.getElementById("closeCheckout").addEventListener("click", closeCheckout);
+    document.getElementById("cancelCheckoutBtn").addEventListener("click", closeCheckout);
+    document.getElementById("checkoutBackdrop").addEventListener("click", closeCheckout);
+    document.getElementById("submitOrderBtn").addEventListener("click", function(){ submitOrder("email"); });
+    document.getElementById("whatsappOrderBtn").addEventListener("click", function(){ submitOrder("whatsapp"); });
+
+    wireSettingsEvents();
+
+    document.addEventListener("keydown", function(e){
+      if(e.key !== "Escape") return;
+      if(!document.getElementById("settingsDrawer").hidden) closeSettingsDrawer();
+      else if(!document.getElementById("checkoutDrawer").hidden) closeCheckout();
+      else if(!document.getElementById("adminModal").hidden) closeAdminModal();
+    });
+  }
+
+  /* Re-wire checkoutBtn/cartBar events after each full render(), since #root is rebuilt */
+  var _origRender = render;
+  render = function(data){
+    _origRender(data);
+    var btn = document.getElementById("checkoutBtn");
+    if(btn) btn.addEventListener("click", openCheckout);
+  };
 
   function boot(){
     var stored = loadStoredData();
     if(stored) window.__DATA__ = stored;
     render(window.__DATA__);
-    buildDrawerMarkup();
-    wireDrawerEvents();
+    buildOverlays();
+    wireOverlayEvents();
   }
 
   boot();
