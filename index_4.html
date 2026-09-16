@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sri Lakshmi Fireworks — Sivakasi Crackers Price List</title>
+<meta name="description" content="Diwali crackers price list and ordering page for a Sivakasi fireworks shop. Fully editable — open Settings to change shop details and the price list.">
+<style id="app-style">
+  :root{
+    --bg:#fff6e8;
+    --surface:#ffffff;
+    --surface-2:#fff0d1;
+    --text:#2a1420;
+    --text-dim:#6b4a52;
+    --border:#f0dcae;
+    --accent:#d1440a;
+    --accent-ink:#ffffff;
+    --accent-2:#a3175c;
+    --accent-3:#0f766e;
+    --shadow:0 12px 32px -16px rgba(42,20,32,0.28);
+    --radius:14px;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1a0f1f;
+      --surface:#241629;
+      --surface-2:#2e1c35;
+      --text:#f7ecd9;
+      --text-dim:#c9adb8;
+      --border:#3d2740;
+      --accent:#f5a623;
+      --accent-ink:#2a1420;
+      --accent-2:#ef6a8c;
+      --accent-3:#3fd6c2;
+      --shadow:0 12px 36px -14px rgba(0,0,0,0.6);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1a0f1f;
+    --surface:#241629;
+    --surface-2:#2e1c35;
+    --text:#f7ecd9;
+    --text-dim:#c9adb8;
+    --border:#3d2740;
+    --accent:#f5a623;
+    --accent-ink:#2a1420;
+    --accent-2:#ef6a8c;
+    --accent-3:#3fd6c2;
+    --shadow:0 12px 36px -14px rgba(0,0,0,0.6);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Mukta","Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:"Baloo 2","Segoe UI",system-ui,sans-serif;
+    text-wrap:balance;
+    margin:0;
+  }
+  a{color:inherit;}
+  button{font:inherit;}
+  .wrap{max-width:960px;margin-inline:auto;padding-inline:20px;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  .tabular{font-variant-numeric:tabular-nums;}
+
+  /* topbar */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar-inner{
+    display:flex;align-items:center;gap:12px;
+    padding-block:10px;
+  }
+  .brand{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;}
+  .brand-name{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.15rem;line-height:1.1;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .brand-tag{font-size:.72rem;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .icon-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--border);background:var(--surface);color:var(--text);
+    cursor:pointer;transition:transform .15s ease, background .15s ease;
+  }
+  .icon-btn:hover{background:var(--surface-2);}
+  .icon-btn:active{transform:scale(.94);}
+  .icon-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .call-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 12px;border-radius:999px;
+    background:var(--accent);color:var(--accent-ink);
+    font-weight:700;font-size:.82rem;white-space:nowrap;text-decoration:none;
+  }
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+  .hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
+  .hero-fade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 0%, var(--bg) 96%);
+  }
+  .hero-content{position:relative;padding-block:44px 34px;text-align:left;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent-2);margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-2);}
+  .hero h1{font-size:clamp(1.9rem,5.5vw,3rem);font-weight:800;line-height:1.05;max-width:16ch;}
+  .hero-offer-sub{margin-top:12px;color:var(--text-dim);font-size:1.02rem;max-width:44ch;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 18px;border-radius:12px;font-weight:700;font-size:.95rem;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;
+  }
+  .cta-primary{background:var(--accent);color:var(--accent-ink);box-shadow:var(--shadow);}
+  .cta-ghost{background:transparent;color:var(--text);border-color:var(--border);}
+  .cta-whatsapp{background:#25d366;color:#04220f;}
+
+  /* quicknav */
+  .quicknav{
+    display:flex;gap:8px;overflow-x:auto;padding-block:14px;
+    scrollbar-width:none;
+  }
+  .quicknav::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;padding:8px 14px;border-radius:999px;
+    background:var(--surface);border:1px solid var(--border);
+    color:var(--text);font-size:.85rem;font-weight:600;text-decoration:none;
+    white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--accent);}
+
+  /* price list */
+  .cat-section{padding-block:22px;scroll-margin-top:76px;}
+  .cat-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;}
+  .cat-head h2{font-size:1.3rem;font-weight:700;}
+  .cat-count{font-size:.78rem;color:var(--text-dim);}
+  .item-grid{display:grid;gap:10px;}
+  .item-card{
+    display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center;
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:13px 16px;
+  }
+  .item-name{font-weight:700;font-size:.97rem;}
+  .item-unit{font-size:.78rem;color:var(--text-dim);grid-column:1;}
+  .item-price{grid-row:1 / span 2;justify-self:end;text-align:right;}
+  .price-mrp{font-size:.78rem;color:var(--text-dim);text-decoration:line-through;}
+  .price-net{font-size:1.15rem;font-weight:800;color:var(--accent-2);}
+  .price-off{
+    display:inline-block;margin-top:2px;font-size:.68rem;font-weight:700;
+    padding:2px 7px;border-radius:999px;background:var(--surface-2);color:var(--accent-3);
+  }
+
+  /* legal strip */
+  .legal{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 18px;margin-block:26px;display:flex;flex-direction:column;gap:6px;
+  }
+  .legal-title{font-weight:700;font-size:.85rem;}
+  .legal p{margin:0;font-size:.82rem;color:var(--text-dim);line-height:1.5;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border);padding-block:28px 100px;margin-top:10px;}
+  .foot-grid{display:grid;gap:18px;grid-template-columns:1.3fr 1fr;}
+  .foot-title{font-weight:700;font-size:.95rem;margin-bottom:6px;}
+  .foot-line{font-size:.85rem;color:var(--text-dim);line-height:1.6;}
+  @media (max-width:520px){ .foot-grid{grid-template-columns:1fr;} }
+
+  /* floating whatsapp */
+  .fab{
+    position:fixed;right:18px;bottom:18px;z-index:50;
+    display:inline-flex;align-items:center;gap:8px;
+    background:#25d366;color:#04220f;border-radius:999px;
+    padding:12px 16px;font-weight:700;font-size:.85rem;text-decoration:none;
+    box-shadow:0 10px 26px -8px rgba(0,0,0,0.4);
+  }
+
+  /* settings drawer */
+  .backdrop{
+    position:fixed;inset:0;background:rgba(15,8,12,.45);z-index:60;
+  }
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:min(420px,100%);
+    background:var(--surface);z-index:61;
+    box-shadow:-16px 0 40px -18px rgba(0,0,0,.4);
+    display:flex;flex-direction:column;
+  }
+  .drawer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 18px;border-bottom:1px solid var(--border);flex-shrink:0;
+  }
+  .drawer-head h2{font-size:1.05rem;}
+  .drawer-body{overflow-y:auto;padding:16px 18px 24px;flex:1;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:.76rem;font-weight:700;color:var(--text-dim);
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;}
+  .field input,.field textarea{
+    width:100%;padding:9px 11px;border-radius:9px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);font:inherit;font-size:.9rem;
+  }
+  .field textarea{resize:vertical;min-height:52px;}
+  .field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+  .section-label{
+    font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent-2);margin:20px 0 10px;
+  }
+  .cat-editor{border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--surface-2);}
+  .cat-editor-head{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+  .cat-editor-head input{flex:1;}
+  .item-row{display:grid;grid-template-columns:1.6fr 1fr .8fr .8fr auto;gap:6px;margin-bottom:6px;align-items:center;}
+  .item-row input{padding:7px 8px;font-size:.82rem;}
+  .row-btn,.mini-btn{
+    border:1px solid var(--border);background:var(--surface);color:var(--text);
+    border-radius:8px;cursor:pointer;padding:7px 9px;font-size:.85rem;line-height:1;
+  }
+  .row-btn:hover,.mini-btn:hover{border-color:var(--accent);}
+  .add-btn{
+    width:100%;padding:9px;border-radius:9px;border:1px dashed var(--border);
+    background:transparent;color:var(--accent-2);font-weight:700;font-size:.84rem;cursor:pointer;
+  }
+  .drawer-foot{
+    padding:14px 18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px;flex-shrink:0;
+  }
+  .drawer-foot-row{display:flex;gap:10px;}
+  .btn-save{
+    flex:1;background:var(--accent);color:var(--accent-ink);border:none;
+    padding:12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:.92rem;
+  }
+  .btn-cancel{
+    background:transparent;border:1px solid var(--border);color:var(--text);
+    padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:600;
+  }
+  .btn-download{
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    padding:11px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;
+  }
+  .save-hint{font-size:.72rem;color:var(--text-dim);line-height:1.45;}
+  .remove-cat{color:var(--accent-2);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+</head>
+<body>
+
+<div id="root"></div>
+
+<script id="data-script">
+window.__DATA__ = {
+  shopName: "Sri Lakshmi Fireworks",
+  tagline: "Direct from Sivakasi · Since 1998",
+  phone: "+91 98765 43210",
+  whatsapp: "919876543210",
+  address: "142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123",
+  hours: "Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)",
+  license: "PESO License No. TN/SVK/2024/00789",
+  offerText: "Diwali Mega Sale",
+  offerSubtext: "Flat 50% off on printed MRP, plus an extra 5% on prepaid orders above ₹5,000.",
+  legalNote: "Sale subject to Explosives Rules, 2008 and local municipal timing restrictions. Fireworks are collected in person at our Sivakasi depot or a nearby partner counter — courier or air transport of crackers is not permitted by law. Please handle and burst crackers only in open spaces, away from children, under adult supervision.",
+  categories: [
+    { name: "Sparklers", items: [
+      { name: "Electric Sparklers 7cm", unit: "Box of 10", mrp: 60, price: 30 },
+      { name: "Electric Sparklers 10cm", unit: "Box of 10", mrp: 90, price: 45 },
+      { name: "Colour Sparklers 12cm", unit: "Box of 5", mrp: 120, price: 60 }
+    ]},
+    { name: "Flower Pots", items: [
+      { name: "Flower Pot – Small", unit: "Piece", mrp: 35, price: 18 },
+      { name: "Flower Pot – Medium", unit: "Piece", mrp: 70, price: 35 },
+      { name: "Flower Pot – Deluxe Musical", unit: "Piece", mrp: 150, price: 75 }
+    ]},
+    { name: "Ground Chakkars", items: [
+      { name: "Chakkar – Regular", unit: "Piece", mrp: 25, price: 12 },
+      { name: "Chakkar – Deluxe Wire", unit: "Piece", mrp: 45, price: 22 }
+    ]},
+    { name: "Rockets", items: [
+      { name: "Rain Rocket", unit: "Piece", mrp: 40, price: 20 },
+      { name: "Sky Shot Rocket – 8 Sound", unit: "Piece", mrp: 180, price: 90 }
+    ]},
+    { name: "Sound Crackers", items: [
+      { name: "Lakshmi Crackers – Small", unit: "Bundle of 10", mrp: 50, price: 25 },
+      { name: "Ashoka Deluxe – Big", unit: "Bundle of 10", mrp: 400, price: 200 }
+    ]},
+    { name: "Aerial Shots", items: [
+      { name: "30 Shots Colour Cake", unit: "Piece", mrp: 900, price: 450 },
+      { name: "60 Shots Multi Cake", unit: "Piece", mrp: 1800, price: 900 }
+    ]},
+    { name: "Gift Boxes", items: [
+      { name: "Family Gift Box – 45 items", unit: "Box", mrp: 2500, price: 1250 },
+      { name: "Deluxe Diwali Hamper – 80 items", unit: "Box", mrp: 5000, price: 2500 }
+    ]}
+  ]
+};
+</script>
+<script id="app-script">
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "crackersShopData";
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function slug(s,i){ return "cat-" + i + "-" + String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,""); }
+  function money(n){
+    n = Number(n)||0;
+    return "₹" + n.toLocaleString("en-IN");
+  }
+  function pctOff(mrp, price){
+    mrp = Number(mrp)||0; price = Number(price)||0;
+    if(mrp<=0 || price>=mrp) return 0;
+    return Math.round((1 - price/mrp)*100);
+  }
+
+  function waLink(data){
+    var msg = "Hi " + data.shopName + ", I would like to enquire about your crackers price list.";
+    return "https://wa.me/" + (data.whatsapp||"").replace(/[^0-9]/g,"") + "?text=" + encodeURIComponent(msg);
+  }
+  function telLink(data){
+    return "tel:" + (data.phone||"").replace(/[^0-9+]/g,"");
+  }
+
+  function loadStoredData(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){ /* localStorage unavailable — fall back to defaults */ }
+    return null;
+  }
+  function persistData(data){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); return true; }
+    catch(e){ return false; }
+  }
+
+  function renderQuickNav(data){
+    return data.categories.map(function(c,i){
+      return '<a class="chip" href="#'+slug(c.name,i)+'">'+esc(c.name)+'</a>';
+    }).join("");
+  }
+
+  function renderCategory(c,i){
+    var items = (c.items||[]).map(function(it){
+      var off = pctOff(it.mrp, it.price);
+      return '' +
+        '<div class="item-card">' +
+          '<div class="item-name">'+esc(it.name)+'</div>' +
+          '<div class="item-price">' +
+            (off>0 ? '<div class="price-mrp tabular">'+money(it.mrp)+'</div>' : '') +
+            '<div class="price-net tabular">'+money(it.price)+'</div>' +
+            (off>0 ? '<span class="price-off">'+off+'% OFF</span>' : '') +
+          '</div>' +
+          '<div class="item-unit">'+esc(it.unit||"")+'</div>' +
+        '</div>';
+    }).join("");
+    return '' +
+      '<section class="cat-section" id="'+slug(c.name,i)+'">' +
+        '<div class="cat-head"><h2>'+esc(c.name)+'</h2><span class="cat-count">'+(c.items||[]).length+' items</span></div>' +
+        '<div class="item-grid">'+items+'</div>' +
+      '</section>';
+  }
+
+  function render(data){
+    var root = document.getElementById("root");
+    var html = '' +
+    '<div class="topbar"><div class="wrap topbar-inner">' +
+      '<div class="brand">' +
+        '<span class="brand-name">'+esc(data.shopName)+'</span>' +
+        '<span class="brand-tag">'+esc(data.tagline)+'</span>' +
+      '</div>' +
+      '<div class="top-actions">' +
+        '<a class="call-chip" href="'+telLink(data)+'" aria-label="Call the shop">☎️ Call</a>' +
+        '<button class="icon-btn" id="settingsBtn" aria-label="Open settings" title="Settings">⚙️</button>' +
+      '</div>' +
+    '</div></div>' +
+
+    '<div class="hero">' +
+      '<canvas class="hero-canvas" id="fxCanvas" aria-hidden="true"></canvas>' +
+      '<div class="hero-fade" aria-hidden="true"></div>' +
+      '<div class="wrap hero-content">' +
+        '<div class="eyebrow">'+esc(data.offerText||"Special Offer")+'</div>' +
+        '<h1>Diwali crackers, straight from the Sivakasi factories.</h1>' +
+        '<p class="hero-offer-sub">'+esc(data.offerSubtext||"")+'</p>' +
+        '<div class="hero-ctas">' +
+          '<a class="cta cta-whatsapp" href="'+waLink(data)+'" target="_blank" rel="noopener">Order on WhatsApp</a>' +
+          '<a class="cta cta-primary" href="'+telLink(data)+'">Call to Order</a>' +
+          '<a class="cta cta-ghost" href="#pricelist">View Price List</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="wrap">' +
+      '<nav class="quicknav" aria-label="Jump to category">'+renderQuickNav(data)+'</nav>' +
+      '<div id="pricelist">' + data.categories.map(renderCategory).join("") + '</div>' +
+      '<div class="legal">' +
+        '<div class="legal-title">'+esc(data.license||"")+'</div>' +
+        '<p>'+esc(data.legalNote||"")+'</p>' +
+      '</div>' +
+    '</div>' +
+
+    '<footer><div class="wrap foot-grid">' +
+      '<div>' +
+        '<div class="foot-title">Visit the shop</div>' +
+        '<div class="foot-line">'+esc(data.address)+'</div>' +
+        '<div class="foot-line">'+esc(data.hours)+'</div>' +
+      '</div>' +
+      '<div>' +
+        '<div class="foot-title">Contact</div>' +
+        '<div class="foot-line"><a href="'+telLink(data)+'">'+esc(data.phone)+'</a></div>' +
+        '<div class="foot-line"><a href="'+waLink(data)+'" target="_blank" rel="noopener">WhatsApp us</a></div>' +
+      '</div>' +
+    '</div></footer>' +
+
+    '<a class="fab" href="'+waLink(data)+'" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬 WhatsApp Order</a>';
+
+    root.innerHTML = html;
+    startFireworks(document.getElementById("fxCanvas"));
+  }
+
+  /* ---------- ambient fireworks canvas ---------- */
+  function startFireworks(canvas){
+    if(!canvas) return;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    var w,h, particles = [];
+    var colors = ["#f5a623","#e0435a","#3fd6c2","#ffd54a","#ff8fab"];
+
+    function resize(){
+      var rect = canvas.parentElement.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = w*dpr; canvas.height = h*dpr;
+      canvas.style.width = w+"px"; canvas.style.height = h+"px";
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function burst(){
+      var cx = w*(0.15+Math.random()*0.7), cy = h*(0.1+Math.random()*0.55);
+      var color = colors[Math.floor(Math.random()*colors.length)];
+      var n = 26;
+      for(var i=0;i<n;i++){
+        var a = (Math.PI*2*i)/n + Math.random()*0.2;
+        var speed = 0.6+Math.random()*1.6;
+        particles.push({x:cx,y:cy,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:1,color:color});
+      }
+    }
+    var lastBurst = 0;
+    function tick(t){
+      if(!w) resize();
+      ctx.clearRect(0,0,w,h);
+      if(t-lastBurst > 1500){ burst(); lastBurst = t; }
+      particles.forEach(function(p){
+        p.x+=p.vx; p.y+=p.vy; p.vy+=0.012; p.life-=0.012;
+        if(p.life>0){
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.fillStyle = p.color;
+          ctx.beginPath(); ctx.arc(p.x,p.y,1.8,0,Math.PI*2); ctx.fill();
+        }
+      });
+      ctx.globalAlpha = 1;
+      particles = particles.filter(function(p){ return p.life>0; });
+      if(!reduced) requestAnimationFrame(tick);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+    if(reduced){
+      burst();
+      ctx.clearRect(0,0,w,h);
+      particles.forEach(function(p){
+        ctx.fillStyle = p.color; ctx.globalAlpha=0.6;
+        ctx.beginPath(); ctx.arc(p.x,p.y,1.8,0,Math.PI*2); ctx.fill();
+      });
+      ctx.globalAlpha=1;
+    } else {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  /* ---------- settings drawer ---------- */
+  var draft = null;
+
+  function cloneData(d){ return JSON.parse(JSON.stringify(d)); }
+
+  function itemRow(catIndex, itemIndex, item){
+    return '' +
+      '<div class="item-row" data-cat="'+catIndex+'" data-item="'+itemIndex+'">' +
+        '<input type="text" class="f-item-name" value="'+esc(item.name)+'" placeholder="Item name">' +
+        '<input type="text" class="f-item-unit" value="'+esc(item.unit||"")+'" placeholder="Unit">' +
+        '<input type="number" min="0" class="f-item-mrp" value="'+(item.mrp||0)+'" placeholder="MRP">' +
+        '<input type="number" min="0" class="f-item-price" value="'+(item.price||0)+'" placeholder="Price">' +
+        '<button type="button" class="row-btn remove-item" title="Remove item">✕</button>' +
+      '</div>';
+  }
+
+  function catEditor(cat, catIndex){
+    var rows = (cat.items||[]).map(function(it,ii){ return itemRow(catIndex, ii, it); }).join("");
+    return '' +
+      '<div class="cat-editor" data-cat="'+catIndex+'">' +
+        '<div class="cat-editor-head">' +
+          '<input type="text" class="f-cat-name" value="'+esc(cat.name)+'" placeholder="Category name">' +
+          '<button type="button" class="mini-btn remove-cat" title="Remove category">Remove</button>' +
+        '</div>' +
+        '<div class="items-holder">'+rows+'</div>' +
+        '<button type="button" class="add-btn add-item" data-cat="'+catIndex+'">+ Add item</button>' +
+      '</div>';
+  }
+
+  function renderCatEditors(){
+    var host = document.getElementById("catEditorHost");
+    host.innerHTML = draft.categories.map(catEditor).join("");
+  }
+
+  function fillForm(){
+    document.getElementById("f-shopName").value = draft.shopName||"";
+    document.getElementById("f-tagline").value = draft.tagline||"";
+    document.getElementById("f-phone").value = draft.phone||"";
+    document.getElementById("f-whatsapp").value = draft.whatsapp||"";
+    document.getElementById("f-address").value = draft.address||"";
+    document.getElementById("f-hours").value = draft.hours||"";
+    document.getElementById("f-license").value = draft.license||"";
+    document.getElementById("f-offerText").value = draft.offerText||"";
+    document.getElementById("f-offerSubtext").value = draft.offerSubtext||"";
+    document.getElementById("f-legalNote").value = draft.legalNote||"";
+    renderCatEditors();
+  }
+
+  function readFormBasics(){
+    draft.shopName = document.getElementById("f-shopName").value.trim() || "Your Fireworks Shop";
+    draft.tagline = document.getElementById("f-tagline").value.trim();
+    draft.phone = document.getElementById("f-phone").value.trim();
+    draft.whatsapp = document.getElementById("f-whatsapp").value.trim();
+    draft.address = document.getElementById("f-address").value.trim();
+    draft.hours = document.getElementById("f-hours").value.trim();
+    draft.license = document.getElementById("f-license").value.trim();
+    draft.offerText = document.getElementById("f-offerText").value.trim();
+    draft.offerSubtext = document.getElementById("f-offerSubtext").value.trim();
+    draft.legalNote = document.getElementById("f-legalNote").value.trim();
+  }
+
+  function readCategoriesFromDOM(){
+    var editors = document.querySelectorAll("#catEditorHost .cat-editor");
+    var cats = [];
+    editors.forEach(function(ed){
+      var name = ed.querySelector(".f-cat-name").value.trim() || "Category";
+      var items = [];
+      ed.querySelectorAll(".item-row").forEach(function(row){
+        items.push({
+          name: row.querySelector(".f-item-name").value.trim() || "Item",
+          unit: row.querySelector(".f-item-unit").value.trim(),
+          mrp: Number(row.querySelector(".f-item-mrp").value)||0,
+          price: Number(row.querySelector(".f-item-price").value)||0
+        });
+      });
+      cats.push({name:name, items:items});
+    });
+    draft.categories = cats;
+  }
+
+  function openDrawer(){
+    draft = cloneData(window.__DATA__);
+    fillForm();
+    document.getElementById("backdrop").hidden = false;
+    document.getElementById("drawer").hidden = false;
+  }
+  function closeDrawer(){
+    document.getElementById("backdrop").hidden = true;
+    document.getElementById("drawer").hidden = true;
+  }
+
+  function escapeForScript(s){
+    return s.replace(/<\/script/gi, "<\\/script");
+  }
+
+  function buildFullHtml(data){
+    var styleEl = document.getElementById("app-style");
+    var appScriptEl = document.getElementById("app-script");
+    var dataJson = escapeForScript(JSON.stringify(data));
+    return "<!doctype html>\n" +
+      "<html lang=\"en\">\n<head>\n" +
+      "<meta charset=\"UTF-8\">\n" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n" +
+      "<title>" + esc(data.shopName) + " — Sivakasi Crackers Price List</title>\n" +
+      "<meta name=\"description\" content=\"Diwali crackers price list and ordering page. Fully editable — open Settings to change shop details and the price list.\">\n" +
+      styleEl.outerHTML + "\n" +
+      "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
+      "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
+      "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap\">\n" +
+      "</head>\n<body>\n" +
+      "<div id=\"root\"></div>\n" +
+      "<script id=\"data-script\">window.__DATA__ = " + dataJson + ";<\/script>\n" +
+      appScriptEl.outerHTML + "\n" +
+      "</body>\n</html>";
+  }
+
+  function downloadHtml(data, filename){
+    try{
+      var blob = new Blob([buildFullHtml(data)], {type:"text/html"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = filename || "index.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+      return true;
+    }catch(e){ return false; }
+  }
+
+  function saveChanges(){
+    readFormBasics();
+    readCategoriesFromDOM();
+    window.__DATA__ = draft;
+    render(draft);
+    closeDrawer();
+
+    var savedLocally = persistData(draft);
+    var downloaded = downloadHtml(draft, "index.html");
+
+    if(downloaded){
+      window.setTimeout(function(){
+        alert("Saved. A file named index.html just downloaded — upload it to your GitHub repo (replacing the old one) so the change goes live for everyone. " +
+          (savedLocally ? "This browser will also keep showing your latest edits until you do." : ""));
+      }, 300);
+    } else if(savedLocally){
+      alert("Saved in this browser, but the automatic download did not start. Use your browser's \"Save As\" on this page after closing this dialog, or ask for the file another way.");
+    } else {
+      alert("Could not save automatically. Your browser may be blocking local storage or downloads.");
+    }
+  }
+
+  function downloadOnly(){
+    readFormBasics();
+    readCategoriesFromDOM();
+    downloadHtml(draft, "index.html");
+  }
+
+  function wireDrawerEvents(){
+    document.getElementById("settingsBtn").addEventListener("click", openDrawer);
+    document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+    document.getElementById("cancelBtn").addEventListener("click", closeDrawer);
+    document.getElementById("backdrop").addEventListener("click", closeDrawer);
+    document.getElementById("saveBtn").addEventListener("click", saveChanges);
+    document.getElementById("downloadBtn").addEventListener("click", downloadOnly);
+    document.getElementById("addCategoryBtn").addEventListener("click", function(){
+      readFormBasics();
+      readCategoriesFromDOM();
+      draft.categories.push({name:"New Category", items:[{name:"New Item", unit:"Piece", mrp:0, price:0}]});
+      renderCatEditors();
+    });
+    document.getElementById("catEditorHost").addEventListener("click", function(e){
+      var addItem = e.target.closest(".add-item");
+      var removeItem = e.target.closest(".remove-item");
+      var removeCat = e.target.closest(".remove-cat");
+      if(addItem){
+        readFormBasics(); readCategoriesFromDOM();
+        var ci = Number(addItem.getAttribute("data-cat"));
+        draft.categories[ci].items.push({name:"New Item", unit:"Piece", mrp:0, price:0});
+        renderCatEditors();
+      } else if(removeItem){
+        var row = e.target.closest(".item-row");
+        readFormBasics(); readCategoriesFromDOM();
+        var ci2 = Number(row.getAttribute("data-cat")), ii2 = Number(row.getAttribute("data-item"));
+        draft.categories[ci2].items.splice(ii2,1);
+        renderCatEditors();
+      } else if(removeCat){
+        var ed = e.target.closest(".cat-editor");
+        readFormBasics(); readCategoriesFromDOM();
+        var ci3 = Number(ed.getAttribute("data-cat"));
+        draft.categories.splice(ci3,1);
+        renderCatEditors();
+      }
+    });
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && !document.getElementById("drawer").hidden) closeDrawer();
+    });
+  }
+
+  function buildDrawerMarkup(){
+    var host = document.createElement("div");
+    host.innerHTML = '' +
+      '<div class="backdrop" id="backdrop" hidden></div>' +
+      '<aside class="drawer" id="drawer" hidden role="dialog" aria-label="Shop settings">' +
+        '<div class="drawer-head"><h2>Shop settings</h2><button class="icon-btn" id="closeDrawer" aria-label="Close settings">✕</button></div>' +
+        '<div class="drawer-body">' +
+          '<div class="section-label">Shop details</div>' +
+          '<div class="field"><label for="f-shopName">Shop name</label><input id="f-shopName" type="text"></div>' +
+          '<div class="field"><label for="f-tagline">Tagline</label><input id="f-tagline" type="text"></div>' +
+          '<div class="field"><label for="f-phone">Phone (for Call button)</label><input id="f-phone" type="text" placeholder="+91 98765 43210"></div>' +
+          '<div class="field"><label for="f-whatsapp">WhatsApp number (digits, country code)</label><input id="f-whatsapp" type="text" placeholder="919876543210"></div>' +
+          '<div class="field"><label for="f-address">Address</label><textarea id="f-address"></textarea></div>' +
+          '<div class="field"><label for="f-hours">Hours</label><input id="f-hours" type="text"></div>' +
+          '<div class="field"><label for="f-license">License / compliance line</label><input id="f-license" type="text"></div>' +
+
+          '<div class="section-label">Offer banner</div>' +
+          '<div class="field"><label for="f-offerText">Offer badge text</label><input id="f-offerText" type="text"></div>' +
+          '<div class="field"><label for="f-offerSubtext">Offer description</label><textarea id="f-offerSubtext"></textarea></div>' +
+          '<div class="field"><label for="f-legalNote">Safety / legal note</label><textarea id="f-legalNote"></textarea></div>' +
+
+          '<div class="section-label">Categories &amp; price list</div>' +
+          '<div id="catEditorHost"></div>' +
+          '<button type="button" class="add-btn" id="addCategoryBtn">+ Add category</button>' +
+        '</div>' +
+        '<div class="drawer-foot">' +
+          '<p class="save-hint">This page is a static file, so "Save" updates what you see here and downloads an updated index.html — upload that file to your GitHub repo to make the change live for visitors.</p>' +
+          '<div class="drawer-foot-row">' +
+            '<button class="btn-cancel" id="cancelBtn" type="button">Cancel</button>' +
+            '<button class="btn-download" id="downloadBtn" type="button" title="Download without closing">Download only</button>' +
+            '<button class="btn-save" id="saveBtn" type="button">Save &amp; download</button>' +
+          '</div>' +
+        '</div>' +
+      '</aside>';
+    while(host.firstChild) document.body.appendChild(host.firstChild);
+  }
+
+  function boot(){
+    var stored = loadStoredData();
+    if(stored) window.__DATA__ = stored;
+    render(window.__DATA__);
+    buildDrawerMarkup();
+    wireDrawerEvents();
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
