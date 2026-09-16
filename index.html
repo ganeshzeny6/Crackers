@@ -321,7 +321,7 @@
 window.__DATA__ = {
   shopName: "Sri Lakshmi Fireworks",
   tagline: "Direct from Sivakasi · Since 1998",
-  phone: "+91 98765 43210",
+  phone: "+91-9876543210",
   whatsapp: "919876543210",
   address: "142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123",
   hours: "Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)",
@@ -394,8 +394,13 @@ window.__DATA__ = {
     return "https://wa.me/" + (data.whatsapp||"").replace(/[^0-9]/g,"") + "?text=" + encodeURIComponent(msg);
   }
   function telLink(data){
-    return "tel:" + (data.phone||"").replace(/[^0-9+]/g,"");
+    return "tel:" + (data.phone||"").replace(/[^0-9+\-()]/g,"");
   }
+  var PHONE_PATTERN = /^(\+91-\d{10}|0\d{2,4}-\d{6,8})$/;
+  function isValidIndianPhone(v){
+    return PHONE_PATTERN.test(String(v||"").trim());
+  }
+  var PHONE_HINT = "Please enter a valid contact number — mobile as +91-9841632734, or landline as 044-26147874.";
 
   function loadStoredData(){
     try{
@@ -740,7 +745,7 @@ window.__DATA__ = {
       '<div class="checkout-summary">'+itemsHtml+'<div class="checkout-line checkout-total"><span>Total</span><span class="tabular">'+money(total)+'</span></div></div>' +
       '<div class="section-label">Your details</div>' +
       '<div class="field"><label for="ord-name">Full name</label><input id="ord-name" type="text" autocomplete="name"></div>' +
-      '<div class="field"><label for="ord-phone">Contact number</label><input id="ord-phone" type="tel" autocomplete="tel"></div>' +
+      '<div class="field"><label for="ord-phone">Contact number</label><input id="ord-phone" type="tel" autocomplete="tel" placeholder="+91-9841632734 or 044-26147874" pattern="^(\\+91-\\d{10}|0\\d{2,4}-\\d{6,8})$"><p class="save-hint" style="margin-top:4px;">Mobile: +91-9841632734 &middot; Landline: 044-26147874</p></div>' +
       '<div class="field"><label for="ord-address">Address to send the parcel</label><textarea id="ord-address" autocomplete="street-address"></textarea></div>' +
       upiHtml;
     document.getElementById("checkoutFoot").hidden = false;
@@ -775,6 +780,10 @@ window.__DATA__ = {
     var upiRef = upiRefEl ? upiRefEl.value.trim() : "";
     if(!name || !phone || !address){
       alert("Please fill your name, contact number and delivery address.");
+      return;
+    }
+    if(!isValidIndianPhone(phone)){
+      alert(PHONE_HINT);
       return;
     }
     var items = getCartItems();
@@ -1077,7 +1086,7 @@ window.__DATA__ = {
           '<div class="section-label" style="margin-top:0;">Shop details</div>' +
           '<div class="field"><label for="f-shopName">Shop name</label><input id="f-shopName" type="text"></div>' +
           '<div class="field"><label for="f-tagline">Tagline</label><input id="f-tagline" type="text"></div>' +
-          '<div class="field"><label for="f-phone">Phone (for Call button)</label><input id="f-phone" type="text" placeholder="+91 98765 43210"></div>' +
+          '<div class="field"><label for="f-phone">Phone (for Call button)</label><input id="f-phone" type="text" placeholder="+91-9841632734 or 044-26147874"></div>' +
           '<div class="field"><label for="f-whatsapp">WhatsApp number (digits, country code)</label><input id="f-whatsapp" type="text" placeholder="919876543210"></div>' +
           '<div class="field"><label for="f-address">Address</label><textarea id="f-address"></textarea></div>' +
           '<div class="field"><label for="f-hours">Hours</label><input id="f-hours" type="text"></div>' +
