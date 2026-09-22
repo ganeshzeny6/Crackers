@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sudharsan Fireworks — Sivakasi Crackers Price List</title>
-<meta name="description" content="Order Diwali crackers online with UPI payment.">
+<title>Sri Lakshmi Fireworks — Sivakasi Crackers Price List</title>
+<meta name="description" content="Order Diwali crackers online — choose quantities, pay by UPI, and get parcels delivered. Admin can edit everything from a password-protected settings panel.">
 <style id="app-style">
   :root{
     --bg:#fff6e8;
@@ -155,7 +155,16 @@
     background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:13px 16px;
   }
-  .item-top{display:flex;justify-content:space-between;gap:14px;}
+  .item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .item-photo{
+    width:52px;height:52px;flex-shrink:0;border-radius:10px;object-fit:cover;
+    background:var(--surface-2);border:1px solid var(--border);
+  }
+  .item-photo-empty{
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+    border-style:dashed;opacity:.6;
+  }
+  .item-info{flex:1;min-width:0;}
   .item-name{font-weight:700;font-size:.97rem;}
   .item-unit{font-size:.78rem;color:var(--text-dim);margin-top:2px;}
   .item-price{text-align:right;flex-shrink:0;}
@@ -252,7 +261,20 @@
   .cat-editor{border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--surface-2);}
   .cat-editor-head{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
   .cat-editor-head input{flex:1;}
-  .item-row{display:grid;grid-template-columns:1.6fr 1fr .8fr .8fr auto;gap:6px;margin-bottom:6px;align-items:center;}
+  .item-edit{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;}
+  .item-photo-upload{
+    width:44px;height:44px;flex-shrink:0;border-radius:8px;border:1px dashed var(--border);
+    background:var(--surface);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;overflow:hidden;font-size:1rem;color:var(--text-dim);
+  }
+  .item-photo-upload:hover{border-color:var(--accent);}
+  .item-photo-upload img{width:100%;height:100%;object-fit:cover;}
+  .item-fields{flex:1;min-width:0;}
+  .remove-item-photo{
+    background:none;border:none;padding:0;color:var(--accent-2);font-size:.72rem;
+    text-decoration:underline;cursor:pointer;margin-top:-2px;margin-bottom:6px;
+  }
+  .item-row{display:grid;grid-template-columns:1.6fr 1fr .8fr .8fr auto;gap:6px;margin-bottom:0;align-items:center;}
   .item-row input{padding:7px 8px;font-size:.82rem;}
   .row-btn,.mini-btn{
     border:1px solid var(--border);background:var(--surface);color:var(--text);
@@ -314,8 +336,287 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
 </head>
 <body>
+
 <div id="root"></div>
-<script id="data-script">window.__DATA__ = {"shopName":"Sudharsan Fireworks","tagline":"Direct from Sivakasi · Since 1998","phone":"9840470376","whatsapp":"9840470376","address":"142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123","hours":"Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)","license":"PESO License No. TN/SVK/2024/00789","offerText":"Diwali Mega Sale","offerSubtext":"Flat 50% off on printed MRP, plus an extra 5% on prepaid orders above ₹5,000.","legalNote":"Sale subject to Explosives Rules, 2008 and local municipal timing restrictions. Fireworks are collected in person at our Sivakasi depot or a nearby partner counter — courier or air transport of crackers is not permitted by law. Please handle and burst crackers only in open spaces, away from children, under adult supervision.","categories":[{"name":"Flower Pots","items":[{"name":"Flower Pot – Small","unit":"Piece","mrp":35,"price":18},{"name":"Flower Pot – Medium","unit":"Piece","mrp":70,"price":35},{"name":"Flower Pot – Deluxe Musical","unit":"Piece","mrp":150,"price":75}]},{"name":"Ground Chakkars","items":[{"name":"Chakkar – Regular","unit":"Piece","mrp":25,"price":12},{"name":"Chakkar – Deluxe Wire","unit":"Piece","mrp":45,"price":22}]},{"name":"Rockets","items":[{"name":"Rain Rocket","unit":"Piece","mrp":40,"price":20},{"name":"Sky Shot Rocket – 8 Sound","unit":"Piece","mrp":180,"price":90}]},{"name":"Sound Crackers","items":[{"name":"Lakshmi Crackers – Small","unit":"Bundle of 10","mrp":50,"price":25},{"name":"Ashoka Deluxe – Big","unit":"Bundle of 10","mrp":400,"price":200}]},{"name":"Aerial Shots","items":[{"name":"30 Shots Colour Cake","unit":"Piece","mrp":900,"price":450},{"name":"60 Shots Multi Cake","unit":"Piece","mrp":1800,"price":900}]},{"name":"Gift Boxes","items":[{"name":"Family Gift Box – 45 items","unit":"Box","mrp":2500,"price":1250},{"name":"Deluxe Diwali Hamper – 80 items","unit":"Box","mrp":5000,"price":2500}]}],"ownerEmail":"Sudhars88@gmail.com","upi":{"id":"9840470376@upi","payeeName":"Sudharsan"},"email":{"serviceId":"","templateId":"","publicKey":""},"adminPassword":"admin123"};</script>
+
+<script id="data-script">
+window.__DATA__ = {
+  shopName: "Sri Lakshmi Fireworks",
+  tagline: "Direct from Sivakasi · Since 1998",
+  phone: "+91-9876543210",
+  whatsapp: "919876543210",
+  address: "142, Crackers Bazaar Road, Sivakasi, Tamil Nadu 626123",
+  hours: "Open daily, 9:00 AM – 9:00 PM (extended hours during Diwali week)",
+  license: "PESO License No. TN/SVK/2024/00789",
+  offerText: "Diwali Mega Sale",
+  offerSubtext: "Flat 50% off on printed MRP, plus an extra 5% on prepaid orders above ₹5,000.",
+  legalNote: "Sale subject to Explosives Rules, 2008 and local municipal timing restrictions. Fireworks are dispatched as a parcel to the address you provide, where permitted — please check local rules before ordering. Handle and burst crackers only in open spaces, away from children, under adult supervision.",
+  ownerEmail: "owner@example.com",
+  upi: { id: "shopname@okhdfcbank", payeeName: "Sri Lakshmi Fireworks", qrImage: "" },
+  email: { serviceId: "", templateId: "", publicKey: "" },
+  adminPassword: "admin123",
+  categories: [
+    { name: "Gift Boxes", items: [
+      { name: "15 items Giftbox", unit: "1Box", mrp: 0, price: 0 },
+      { name: "27 items Giftbox", unit: "1Box", mrp: 0, price: 0 },
+      { name: "30 items Giftbox", unit: "1Box", mrp: 0, price: 0 },
+      { name: "40 items Giftbox", unit: "1Box", mrp: 0, price: 0 },
+      { name: "50 items Giftbox", unit: "1Box", mrp: 0, price: 0 },
+      { name: "60 items Giftbox", unit: "1Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Family Combo Packs", items: [
+      { name: "The Celebration", unit: "40Items", mrp: 20000, price: 16000 },
+      { name: "The Grand Edit", unit: "52Items", mrp: 30000, price: 24000 },
+      { name: "The Signature Edition", unit: "60Items", mrp: 40000, price: 32000 },
+      { name: "The Prestige Edit", unit: "72Items", mrp: 60000, price: 48000 },
+      { name: "The Novelty Edit", unit: "45Items", mrp: 55000, price: 44000 }
+    ]},
+    { name: "Flash Light Crackers", items: [
+      { name: "2 3/4' Kuruvi", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "3 1/2' Lakshmi", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "4' Lakshmi", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "4' Deluxe Lakshmi", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "4' Gold Lakshmi", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "5' Deluxe Jallikattu (Lakshmi)", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "6' Lion King", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "Two sound crackers", unit: "5Pcs-Pkt", mrp: 0, price: 0 },
+      { name: "Paper Bomb 250g", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Paper Bomb 500g", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Paper Bomb 1kg", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Colour Paper Bomb", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Colour Magic Whip (Digital 1k wala)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Magic Sound (Digital 1k wala)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "90 Watts (Digital 200 wala)", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Old is Gold (Ola Vedi)", unit: "25Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Sparklers", items: [
+      { name: "Rotating Sparklers (5 Rotating sticks)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "7 Cm Electric sparklers (5 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "7 Cm Crackling sparklers (5 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "10 Cm Electric sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "10 Cm Crackling sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "10 Cm Green sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "10 Cm Red sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "12 Cm Electric sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "12 Cm Crackling sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "12 Cm Green sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "12 Cm Red sparklers (2 Boxes)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "15 Cm Electric sparklers", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "15 Cm Crackling sparklers", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "15 Cm Green sparklers", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "15 Cm Red sparklers", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "30 Cm Electric sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "30 Cm Crackling sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "30 Cm Green sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "30 Cm Red sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "50 cm Electric sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "50 cm Crackling sparklers", unit: "5Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Matches", items: [
+      { name: "Deluxe matches (Sachin)", unit: "10Boxes", mrp: 0, price: 0 },
+      { name: "Laptop colour Matches Mini (Lion/Prince)", unit: "10Boxes", mrp: 0, price: 0 },
+      { name: "Laptop colour matches (Royal)", unit: "10Boxes", mrp: 0, price: 0 }
+    ]},
+    { name: "Ground Chakkars", items: [
+      { name: "Ground chakkar Big 10 Pcs", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Ground chakkar Big 25 Pcs", unit: "25Pcs-Box", mrp: 0, price: 0 },
+      { name: "Ground chakkar Asoka", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Ground chakkar Special", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Ground chakkar Deluxe", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Wire chakkar", unit: "10Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Ground Chakkar Wheel Series", items: [
+      { name: "Win Wheel Mini", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Win Wheel Max", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Spinner Special", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Spinner Deluxe", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Whistling Wheel", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Whizz Chakkar", unit: "3Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Flower Pot", items: [
+      { name: "Flower pot Big", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Flower pot Special", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Flower pot Deluxe (5 Pcs)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Flower Pot Giant", unit: "10Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Fancy Flower Pot", items: [
+      { name: "Colour Koti (Pot Girl)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Colour Koti (Arjun)", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Colour Koti Deluxe", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Colour Koti Pink", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Colour Koti Red", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Tri Colour Fountain (Wowstar)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Scooby mini Tri colour", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Popoye Tri colour", unit: "5Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Magic Flowers", items: [
+      { name: "Chotta fancy Red/Gold/Silver/Green", unit: "Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Torches", items: [
+      { name: "10' pencil", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "12' pencil", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "15' pencil", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Navarang pencil", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Pop Corn - Starvell", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Water falls Pencil - Starvell", unit: "5Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Twinkling Star", items: [
+      { name: "18' Twinkling star", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "48' Twinkling star", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Jil Jil", unit: "100Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Spinklings", items: [
+      { name: "Electric stone", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Emarald", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Tim Tam", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Kit Kat", unit: "10Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Musical Rocket", items: [
+      { name: "Musical rocket", unit: "5Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Rockets", items: [
+      { name: "Colour rocket", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Rocket bomb", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Lunik express rocket", unit: "10Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Atom Bomb", items: [
+      { name: "Bullet/Atom bomb", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Hydro Bomb", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "King of king", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Dinosaur bomb 7ply", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Digital Bomb", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Cylinder Bomb", unit: "1Pc", mrp: 0, price: 0 }
+    ]},
+    { name: "Bijili Crackers", items: [
+      { name: "Red bijili 50 pcs", unit: "1Bag", mrp: 0, price: 0 },
+      { name: "Red bijili 100 pcs", unit: "1Bag", mrp: 0, price: 0 },
+      { name: "Stripped Bijili 100 pcs", unit: "1Bag", mrp: 0, price: 0 }
+    ]},
+    { name: "Fancy Novelties", items: [
+      { name: "7 Shots 5 pcs", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "7 Shots 10 pcs", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Lolli Pop", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "4 * 4 Wheel", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Top Gun", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Black Money", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Shinchan (Digital Wala)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Motlu Batlu", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "4' Water Queen", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "6' Water queen", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Pistol 5G", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "Money in the bank (3pcs box)", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Sound Marriage (3pcs Box)", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Emu egg", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "Kuala Lambur", unit: "6Pcs-Box", mrp: 0, price: 0 },
+      { name: "Bambaram", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Dancing Butterfly", unit: "10Pcs-Box", mrp: 0, price: 0 },
+      { name: "Photo Flash", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Helicopter", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Siren", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Selfie Stick", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Peacock Feather", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Tin Cracker", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Corona Extra (Wowstar - Tin)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Dora singer (5 Pcs)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Magic smoke (3Pcs)", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "Moon Light Shower", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "White House", unit: "6Pcs-Box", mrp: 0, price: 0 },
+      { name: "Wonder Mix", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "6' Pop corn Fountain", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "6' Water game Fountain", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Lolli Pop Fountain", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "8' Triple Monkey 3 in 1", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "8' Koli soda", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Gems Colour Mix (Kitkat - All Colour Mix)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Kurkur", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Colour Fountain Mini", unit: "6Pcs-Box", mrp: 0, price: 0 },
+      { name: "Bonsai(Mini Fountain)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Layz (Shower)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "UP (Sky Shot)", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Mr. Bean", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "1' Shell Skyshot", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "Mumbai Beauty", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Peacock Golden/Multi Colour (Amman)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Bada Peacock (Wowstar)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Bada Peacock 2 in 1 (Wowstar)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Bada Peacock (Suryakala)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Bada Peacock (Amman)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Sound Marriage (1Pc)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Water Melon", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Money in the bank (1 Pc)", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Car Race", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "Sound Marriage (3Pcs)", unit: "3 Pcs-Box", mrp: 0, price: 0 },
+      { name: "Penta Collections", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Sun Light Shower", unit: "5Pcs-Box", mrp: 0, price: 0 },
+      { name: "Bat & ball (Crackling bat & Smoke ball) Crackers", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Vel Crackers", unit: "2 Pcs-Box", mrp: 0, price: 0 },
+      { name: "i-Cone (Shower)", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "Kulfi (Hand Shower)", unit: "3Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Aerial Fancy", items: [
+      { name: "2' Fancy Out Single (LCU Series)", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "2' Fancy 3 step pipe", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3' Fancy 3 step pipe", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "2' Fancy Out 3 pcs", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "2' Fancy Out 3 pcs (Premium-Vinayak)", unit: "3Pcs-Box", mrp: 0, price: 0 },
+      { name: "2.5' Fancy Out", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3' Fancy Out", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3.5' Fancy out", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3.5' Nayagara falls", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3.5' Nayagara falls (Double pieces)", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "4' Nayagara falls", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "3.5' Seven Step Wedding Celebration", unit: "1Pc-Box", mrp: 0, price: 0 },
+      { name: "4' Fancy Out", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "4' Fancy Out - Double (Maruti)", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "4' Fancy Out - Double (Suryakala)", unit: "2Pcs-Box", mrp: 0, price: 0 },
+      { name: "6' Fancy Out (Sri Vijay)", unit: "2Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Aerial Fancy - Premium", items: [
+      { name: "WOW PINK", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "WOW PURPLE", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "WOW BLUE", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "WOW ORANGE", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "WOW COLOUR", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "TEXAS DELIGHT", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "GOLDEN EYE", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "TOWER SERIES - Double", unit: "2Pcs-Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Multi Colour Shots (Premium Quality)", items: [
+      { name: "12 Shots Multi colour/12 Shots R & G", unit: "1Box", mrp: 0, price: 0 },
+      { name: "12 Shots Glittering", unit: "1Box", mrp: 0, price: 0 },
+      { name: "15 Shots Multi Colour (Suryakala)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "30 shots Multi Colour (Suryakala)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "60 Shots Multi colour (Suryakala)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "25 Shots Multi Colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "30 Shots Multi colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "50 Shots Multi Colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "60 Shots Multi colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "100 Shots Multi Colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "120 Shots Multi colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "240 Shots Multi Colour (Maruti)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "30 Shots Multi colour (Vinayak)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "60 Shots Multi Colour (Vinayak)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "30 Shots Multi colour (Wowstar)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Peacock Dance 30 Shots", unit: "1Box", mrp: 0, price: 0 },
+      { name: "60 Shots Multi colour (Wowstar)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "120 Shots Multi colour (Wowstar)", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Gujarat Festival 150 Shots Rider (Multi Colour)", unit: "1 PC", mrp: 0, price: 0 }
+    ]},
+    { name: "Multi Colour Shots (Economical)", items: [
+      { name: "30 Shots Multi colour (Kathirvelan)", unit: "1Box", mrp: 0, price: 0 }
+    ]},
+    { name: "Kids Gun", items: [
+      { name: "Roll Gun - 40", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Roll Gun - 60", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Roll Cap", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Ring Gun", unit: "1Pc", mrp: 0, price: 0 },
+      { name: "Ring Cap", unit: "10Boxes", mrp: 0, price: 0 },
+      { name: "Anaconda - Black Serpent", unit: "1Box", mrp: 0, price: 0 },
+      { name: "Snake Tablet", unit: "1Box", mrp: 0, price: 0 }
+    ]}
+  ]
+};
+</script>
 <script id="app-script">
 (function(){
   "use strict";
@@ -377,7 +678,10 @@
       return '' +
         '<div class="item-card" data-cat="'+i+'" data-item="'+ii+'">' +
           '<div class="item-top">' +
-            '<div><div class="item-name">'+esc(it.name)+'</div><div class="item-unit">'+esc(it.unit||"")+'</div></div>' +
+            (it.image ?
+              '<img class="item-photo" src="'+it.image+'" alt="'+esc(it.name)+'">' :
+              '<div class="item-photo item-photo-empty" aria-hidden="true">🎇</div>') +
+            '<div class="item-info"><div class="item-name">'+esc(it.name)+'</div><div class="item-unit">'+esc(it.unit||"")+'</div></div>' +
             '<div class="item-price">' +
               (off>0 ? '<div class="price-mrp tabular">'+money(it.mrp)+'</div>' : '') +
               '<div class="price-net tabular">'+money(it.price)+'</div>' +
@@ -764,12 +1068,21 @@
 
   function itemRow(catIndex, itemIndex, item){
     return '' +
-      '<div class="item-row" data-cat="'+catIndex+'" data-item="'+itemIndex+'">' +
-        '<input type="text" class="f-item-name" value="'+esc(item.name)+'" placeholder="Item name">' +
-        '<input type="text" class="f-item-unit" value="'+esc(item.unit||"")+'" placeholder="Unit">' +
-        '<input type="number" min="0" class="f-item-mrp" value="'+(item.mrp||0)+'" placeholder="MRP">' +
-        '<input type="number" min="0" class="f-item-price" value="'+(item.price||0)+'" placeholder="Price">' +
-        '<button type="button" class="row-btn remove-item" title="Remove item">✕</button>' +
+      '<div class="item-edit" data-cat="'+catIndex+'" data-item="'+itemIndex+'">' +
+        '<label class="item-photo-upload" title="'+(item.image ? "Change photo" : "Add photo")+'">' +
+          '<input type="file" accept="image/*" class="f-item-photo" hidden>' +
+          (item.image ? '<img src="'+item.image+'" alt="">' : '+') +
+        '</label>' +
+        '<div class="item-fields">' +
+          '<div class="item-row">' +
+            '<input type="text" class="f-item-name" value="'+esc(item.name)+'" placeholder="Item name">' +
+            '<input type="text" class="f-item-unit" value="'+esc(item.unit||"")+'" placeholder="Unit">' +
+            '<input type="number" min="0" class="f-item-mrp" value="'+(item.mrp||0)+'" placeholder="MRP">' +
+            '<input type="number" min="0" class="f-item-price" value="'+(item.price||0)+'" placeholder="Price">' +
+            '<button type="button" class="row-btn remove-item" title="Remove item">✕</button>' +
+          '</div>' +
+          (item.image ? '<button type="button" class="remove-item-photo" title="Remove photo">Remove photo</button>' : '') +
+        '</div>' +
       '</div>';
   }
   function catEditor(cat, catIndex){
@@ -845,12 +1158,15 @@
     editors.forEach(function(ed){
       var name = ed.querySelector(".f-cat-name").value.trim() || "Category";
       var items = [];
-      ed.querySelectorAll(".item-row").forEach(function(row){
+      ed.querySelectorAll(".item-edit").forEach(function(wrap){
+        var row = wrap.querySelector(".item-row");
+        var imgEl = wrap.querySelector(".item-photo-upload img");
         items.push({
           name: row.querySelector(".f-item-name").value.trim() || "Item",
           unit: row.querySelector(".f-item-unit").value.trim(),
           mrp: Number(row.querySelector(".f-item-mrp").value)||0,
-          price: Number(row.querySelector(".f-item-price").value)||0
+          price: Number(row.querySelector(".f-item-price").value)||0,
+          image: imgEl ? (imgEl.getAttribute("src")||"") : ""
         });
       });
       cats.push({name:name, items:items});
@@ -950,15 +1266,16 @@
       var addItem = e.target.closest(".add-item");
       var removeItem = e.target.closest(".remove-item");
       var removeCat = e.target.closest(".remove-cat");
+      var removePhoto = e.target.closest(".remove-item-photo");
       if(addItem){
         readFormBasics(); readCategoriesFromDOM();
         var ci = Number(addItem.getAttribute("data-cat"));
-        draft.categories[ci].items.push({name:"New Item", unit:"Piece", mrp:0, price:0});
+        draft.categories[ci].items.push({name:"New Item", unit:"Piece", mrp:0, price:0, image:""});
         renderCatEditors();
       } else if(removeItem){
-        var row = e.target.closest(".item-row");
+        var editRow = e.target.closest(".item-edit");
         readFormBasics(); readCategoriesFromDOM();
-        var ci2 = Number(row.getAttribute("data-cat")), ii2 = Number(row.getAttribute("data-item"));
+        var ci2 = Number(editRow.getAttribute("data-cat")), ii2 = Number(editRow.getAttribute("data-item"));
         draft.categories[ci2].items.splice(ii2,1);
         renderCatEditors();
       } else if(removeCat){
@@ -967,7 +1284,27 @@
         var ci3 = Number(ed.getAttribute("data-cat"));
         draft.categories.splice(ci3,1);
         renderCatEditors();
+      } else if(removePhoto){
+        var editRow2 = e.target.closest(".item-edit");
+        readFormBasics(); readCategoriesFromDOM();
+        var ci4 = Number(editRow2.getAttribute("data-cat")), ii4 = Number(editRow2.getAttribute("data-item"));
+        draft.categories[ci4].items[ii4].image = "";
+        renderCatEditors();
       }
+    });
+    document.getElementById("catEditorHost").addEventListener("change", function(e){
+      if(!e.target.classList.contains("f-item-photo")) return;
+      var file = e.target.files[0];
+      if(!file) return;
+      var editRow3 = e.target.closest(".item-edit");
+      var ci5 = Number(editRow3.getAttribute("data-cat")), ii5 = Number(editRow3.getAttribute("data-item"));
+      readFormBasics(); readCategoriesFromDOM();
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        draft.categories[ci5].items[ii5].image = ev.target.result;
+        renderCatEditors();
+      };
+      reader.readAsDataURL(file);
     });
     document.getElementById("f-upiQr").addEventListener("change", function(e){
       var file = e.target.files[0];
