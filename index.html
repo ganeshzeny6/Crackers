@@ -159,22 +159,12 @@
   .item-photo{
     width:52px;height:52px;flex-shrink:0;border-radius:10px;object-fit:cover;
     background:var(--surface-2);border:1px solid var(--border);
-    transition:transform .15s ease, box-shadow .15s ease;
-    transform-origin:top left;
   }
   .item-photo-empty{
     display:flex;align-items:center;justify-content:center;font-size:1.3rem;
     border-style:dashed;opacity:.6;
-    transition:transform .15s ease, box-shadow .15s ease;
-    transform-origin:top left;
   }
-  .item-photo-wrap{position:relative;display:inline-block;flex-shrink:0;}
-  .item-photo-wrap:hover .item-photo,
-  .item-photo-wrap:hover .item-photo-empty{
-    transform:scale(3);
-    z-index:30;
-    box-shadow:0 14px 30px -10px rgba(0,0,0,.5);
-  }
+  .item-photo-wrap{position:relative;display:inline-block;flex-shrink:0;cursor:pointer;}
   .item-photo-edit-badge{
     display:none;position:absolute;bottom:-4px;right:-4px;width:18px;height:18px;
     border-radius:50%;background:var(--accent);color:var(--accent-ink);
@@ -345,6 +335,10 @@
   .modal h2{font-size:1.05rem;margin-bottom:8px;}
   .modal-actions{display:flex;gap:10px;margin-top:14px;}
   .modal-actions .btn-save{flex:1;}
+  .photo-lightbox{width:auto;max-width:min(92vw,480px);text-align:center;}
+  .photo-lightbox img{max-width:100%;max-height:70vh;border-radius:12px;display:block;margin:0 auto;background:var(--surface-2);}
+  .photo-lightbox-close{position:absolute;top:8px;right:8px;}
+  .photo-lightbox-caption{margin-top:10px;font-weight:700;font-size:.9rem;}
 
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
@@ -860,7 +854,15 @@ window.__DATA__ = {
     var list = document.getElementById("pricelist");
     list.addEventListener("click", function(e){
       var photoWrap = e.target.closest(".item-photo-wrap");
-      if(photoWrap && !adminMode){ e.preventDefault(); return; }
+      if(photoWrap){
+        if(adminMode) return; // let the label open the file picker
+        e.preventDefault();
+        var card0 = photoWrap.closest(".item-card");
+        var ci0 = card0.getAttribute("data-cat"), ii0 = card0.getAttribute("data-item");
+        var item0 = window.__DATA__.categories[ci0] && window.__DATA__.categories[ci0].items[ii0];
+        if(item0 && item0.image){ openPhotoLightbox(item0.image, item0.name); }
+        return;
+      }
       var minus = e.target.closest(".qty-minus");
       var plus = e.target.closest(".qty-plus");
       if(!minus && !plus) return;
@@ -1375,6 +1377,20 @@ window.__DATA__ = {
     });
   }
 
+  /* ---------- photo lightbox ---------- */
+  function openPhotoLightbox(src, name){
+    document.getElementById("photoLightboxImg").src = src;
+    document.getElementById("photoLightboxImg").alt = name || "";
+    document.getElementById("photoLightboxCaption").textContent = name || "";
+    document.getElementById("photoLightboxBackdrop").hidden = false;
+    document.getElementById("photoLightbox").hidden = false;
+  }
+  function closePhotoLightbox(){
+    document.getElementById("photoLightboxBackdrop").hidden = true;
+    document.getElementById("photoLightbox").hidden = true;
+    document.getElementById("photoLightboxImg").src = "";
+  }
+
   /* ---------- admin login ---------- */
   function openAdminModal(){
     document.getElementById("adminPasswordInput").value = "";
@@ -1391,6 +1407,7 @@ window.__DATA__ = {
     if(pw === (window.__DATA__.adminPassword || "admin123")){
       closeAdminModal();
       enterAdminMode();
+      openSettingsDrawer();
     } else {
       alert("Incorrect password.");
     }
@@ -1479,6 +1496,13 @@ window.__DATA__ = {
           '<button class="btn-cancel" id="adminCancelBtn" type="button">Cancel</button>' +
           '<button class="btn-save" id="adminUnlockBtn" type="button">Unlock</button>' +
         '</div>' +
+      '</div>' +
+      /* photo lightbox */
+      '<div class="backdrop" id="photoLightboxBackdrop" hidden></div>' +
+      '<div class="modal photo-lightbox" id="photoLightbox" hidden role="dialog" aria-label="Product photo">' +
+        '<button type="button" class="icon-btn photo-lightbox-close" id="closePhotoLightbox" aria-label="Close">✕</button>' +
+        '<img id="photoLightboxImg" src="" alt="">' +
+        '<div class="photo-lightbox-caption" id="photoLightboxCaption"></div>' +
       '</div>';
     while(host.firstChild) document.body.appendChild(host.firstChild);
   }
@@ -1493,6 +1517,8 @@ window.__DATA__ = {
     document.getElementById("adminPasswordInput").addEventListener("keydown", function(e){
       if(e.key === "Enter") tryAdminUnlock();
     });
+    document.getElementById("closePhotoLightbox").addEventListener("click", closePhotoLightbox);
+    document.getElementById("photoLightboxBackdrop").addEventListener("click", closePhotoLightbox);
 
     document.getElementById("closeCheckout").addEventListener("click", closeCheckout);
     document.getElementById("cancelCheckoutBtn").addEventListener("click", closeCheckout);
@@ -1507,6 +1533,7 @@ window.__DATA__ = {
       if(!document.getElementById("settingsDrawer").hidden) closeSettingsDrawer();
       else if(!document.getElementById("checkoutDrawer").hidden) closeCheckout();
       else if(!document.getElementById("adminModal").hidden) closeAdminModal();
+      else if(!document.getElementById("photoLightbox").hidden) closePhotoLightbox();
     });
   }
 
