@@ -164,6 +164,31 @@
     display:flex;align-items:center;justify-content:center;font-size:1.3rem;
     border-style:dashed;opacity:.6;
   }
+  .item-photo-wrap{position:relative;display:inline-block;flex-shrink:0;}
+  .item-photo-edit-badge{
+    display:none;position:absolute;bottom:-4px;right:-4px;width:18px;height:18px;
+    border-radius:50%;background:var(--accent);color:var(--accent-ink);
+    font-size:.65rem;line-height:1;align-items:center;justify-content:center;
+    border:2px solid var(--bg);
+  }
+  body.admin-active .item-photo-wrap{cursor:pointer;}
+  body.admin-active .item-photo-edit-badge{display:flex;}
+  .admin-bar{
+    position:fixed;top:0;left:0;right:0;z-index:65;
+    background:var(--accent);color:var(--accent-ink);
+    padding-top:env(safe-area-inset-top,0px);
+    box-shadow:0 6px 18px -8px rgba(0,0,0,.35);
+  }
+  .admin-bar-inner{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding-block:8px;flex-wrap:wrap;
+  }
+  .admin-bar-inner span{font-size:.8rem;font-weight:700;}
+  .admin-bar-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .admin-bar .mini-btn,.admin-bar .btn-cancel{background:var(--surface);}
+  .admin-bar .btn-save{padding:8px 14px;font-size:.82rem;}
+  body.admin-active{padding-top:44px;}
+  body.admin-active .topbar{top:44px;}
   .item-info{flex:1;min-width:0;}
   .item-name{font-weight:700;font-size:.97rem;}
   .item-unit{font-size:.78rem;color:var(--text-dim);margin-top:2px;}
@@ -623,6 +648,7 @@ window.__DATA__ = {
 
   var STORAGE_KEY = "crackersShopData";
   var cart = {}; // key: "ci_ii" -> qty
+  var adminMode = false;
 
   function esc(s){
     return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
@@ -678,9 +704,13 @@ window.__DATA__ = {
       return '' +
         '<div class="item-card" data-cat="'+i+'" data-item="'+ii+'">' +
           '<div class="item-top">' +
-            (it.image ?
-              '<img class="item-photo" src="'+it.image+'" alt="'+esc(it.name)+'">' :
-              '<div class="item-photo item-photo-empty" aria-hidden="true">🎇</div>') +
+            '<label class="item-photo-wrap">' +
+              '<input type="file" accept="image/*" class="item-photo-input" hidden data-cat="'+i+'" data-item="'+ii+'">' +
+              (it.image ?
+                '<img class="item-photo" src="'+it.image+'" alt="'+esc(it.name)+'">' :
+                '<div class="item-photo item-photo-empty" aria-hidden="true">🎇</div>') +
+              '<span class="item-photo-edit-badge" aria-hidden="true">✎</span>' +
+            '</label>' +
             '<div class="item-info"><div class="item-name">'+esc(it.name)+'</div><div class="item-unit">'+esc(it.unit||"")+'</div></div>' +
             '<div class="item-price">' +
               (off>0 ? '<div class="price-mrp tabular">'+money(it.mrp)+'</div>' : '') +
@@ -835,6 +865,8 @@ window.__DATA__ = {
   function wirePriceListEvents(){
     var list = document.getElementById("pricelist");
     list.addEventListener("click", function(e){
+      var photoWrap = e.target.closest(".item-photo-wrap");
+      if(photoWrap && !adminMode){ e.preventDefault(); return; }
       var minus = e.target.closest(".qty-minus");
       var plus = e.target.closest(".qty-plus");
       if(!minus && !plus) return;
@@ -846,6 +878,30 @@ window.__DATA__ = {
       applyQty(card, val);
     });
     list.addEventListener("change", function(e){
+      if(e.target.classList.contains("item-photo-input")){
+        if(!adminMode) return;
+        var file = e.target.files[0];
+        if(!file) return;
+        var ci = e.target.getAttribute("data-cat"), ii = e.target.getAttribute("data-item");
+        var reader = new FileReader();
+        reader.onload = function(ev){
+          window.__DATA__.categories[ci].items[ii].image = ev.target.result;
+          var wrap = e.target.closest(".item-photo-wrap");
+          var existingImg = wrap.querySelector("img.item-photo");
+          var placeholder = wrap.querySelector(".item-photo-empty");
+          if(existingImg){
+            existingImg.src = ev.target.result;
+          } else if(placeholder){
+            var img = document.createElement("img");
+            img.className = "item-photo";
+            img.alt = "";
+            img.src = ev.target.result;
+            wrap.replaceChild(img, placeholder);
+          }
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
       if(!e.target.classList.contains("qty-input")) return;
       var card = e.target.closest(".item-card");
       var val = Math.max(0, parseInt(e.target.value,10)||0);
@@ -1340,9 +1396,31 @@ window.__DATA__ = {
     var pw = document.getElementById("adminPasswordInput").value;
     if(pw === (window.__DATA__.adminPassword || "admin123")){
       closeAdminModal();
-      openSettingsDrawer();
+      enterAdminMode();
     } else {
       alert("Incorrect password.");
+    }
+  }
+  function enterAdminMode(){
+    adminMode = true;
+    document.body.classList.add("admin-active");
+    document.getElementById("adminBar").hidden = false;
+  }
+  function exitAdminMode(){
+    adminMode = false;
+    document.body.classList.remove("admin-active");
+    document.getElementById("adminBar").hidden = true;
+  }
+  function saveAdminChanges(){
+    var savedLocally = persistData(window.__DATA__);
+    var downloaded = downloadHtml(window.__DATA__, "index.html");
+    if(downloaded){
+      alert("Saved. A file named index.html just downloaded — upload it to your GitHub repo (replacing the old one) so these photos go live for everyone. " +
+        (savedLocally ? "This browser will also keep showing your latest edits until you do." : ""));
+    } else if(savedLocally){
+      alert("Saved in this browser, but the automatic download did not start.");
+    } else {
+      alert("Could not save automatically. Your browser may be blocking local storage or downloads.");
     }
   }
 
@@ -1425,6 +1503,17 @@ window.__DATA__ = {
           '<button class="btn-cancel" id="adminCancelBtn" type="button">Cancel</button>' +
           '<button class="btn-save" id="adminUnlockBtn" type="button">Unlock</button>' +
         '</div>' +
+      '</div>' +
+      /* admin mode bar */
+      '<div class="admin-bar" id="adminBar" hidden>' +
+        '<div class="wrap admin-bar-inner">' +
+          '<span>Admin mode — tap any product photo to upload</span>' +
+          '<div class="admin-bar-actions">' +
+            '<button type="button" class="mini-btn" id="openFullSettingsBtn">Full settings</button>' +
+            '<button type="button" class="btn-save" id="adminSaveBtn">Save &amp; download</button>' +
+            '<button type="button" class="btn-cancel" id="exitAdminBtn">Exit</button>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     while(host.firstChild) document.body.appendChild(host.firstChild);
   }
@@ -1437,6 +1526,9 @@ window.__DATA__ = {
     document.getElementById("adminPasswordInput").addEventListener("keydown", function(e){
       if(e.key === "Enter") tryAdminUnlock();
     });
+    document.getElementById("openFullSettingsBtn").addEventListener("click", openSettingsDrawer);
+    document.getElementById("adminSaveBtn").addEventListener("click", saveAdminChanges);
+    document.getElementById("exitAdminBtn").addEventListener("click", exitAdminMode);
 
     document.getElementById("closeCheckout").addEventListener("click", closeCheckout);
     document.getElementById("cancelCheckoutBtn").addEventListener("click", closeCheckout);
