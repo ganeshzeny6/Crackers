@@ -159,36 +159,30 @@
   .item-photo{
     width:52px;height:52px;flex-shrink:0;border-radius:10px;object-fit:cover;
     background:var(--surface-2);border:1px solid var(--border);
+    transition:transform .15s ease, box-shadow .15s ease;
+    transform-origin:top left;
   }
   .item-photo-empty{
     display:flex;align-items:center;justify-content:center;font-size:1.3rem;
     border-style:dashed;opacity:.6;
+    transition:transform .15s ease, box-shadow .15s ease;
+    transform-origin:top left;
   }
   .item-photo-wrap{position:relative;display:inline-block;flex-shrink:0;}
+  .item-photo-wrap:hover .item-photo,
+  .item-photo-wrap:hover .item-photo-empty{
+    transform:scale(3);
+    z-index:30;
+    box-shadow:0 14px 30px -10px rgba(0,0,0,.5);
+  }
   .item-photo-edit-badge{
     display:none;position:absolute;bottom:-4px;right:-4px;width:18px;height:18px;
     border-radius:50%;background:var(--accent);color:var(--accent-ink);
     font-size:.65rem;line-height:1;align-items:center;justify-content:center;
-    border:2px solid var(--bg);
+    border:2px solid var(--bg);z-index:31;
   }
   body.admin-active .item-photo-wrap{cursor:pointer;}
   body.admin-active .item-photo-edit-badge{display:flex;}
-  .admin-bar{
-    position:fixed;top:0;left:0;right:0;z-index:65;
-    background:var(--accent);color:var(--accent-ink);
-    padding-top:env(safe-area-inset-top,0px);
-    box-shadow:0 6px 18px -8px rgba(0,0,0,.35);
-  }
-  .admin-bar-inner{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-    padding-block:8px;flex-wrap:wrap;
-  }
-  .admin-bar-inner span{font-size:.8rem;font-weight:700;}
-  .admin-bar-actions{display:flex;gap:8px;flex-wrap:wrap;}
-  .admin-bar .mini-btn,.admin-bar .btn-cancel{background:var(--surface);}
-  .admin-bar .btn-save{padding:8px 14px;font-size:.82rem;}
-  body.admin-active{padding-top:44px;}
-  body.admin-active .topbar{top:44px;}
   .item-info{flex:1;min-width:0;}
   .item-name{font-weight:700;font-size:.97rem;}
   .item-unit{font-size:.78rem;color:var(--text-dim);margin-top:2px;}
@@ -1404,24 +1398,6 @@ window.__DATA__ = {
   function enterAdminMode(){
     adminMode = true;
     document.body.classList.add("admin-active");
-    document.getElementById("adminBar").hidden = false;
-  }
-  function exitAdminMode(){
-    adminMode = false;
-    document.body.classList.remove("admin-active");
-    document.getElementById("adminBar").hidden = true;
-  }
-  function saveAdminChanges(){
-    var savedLocally = persistData(window.__DATA__);
-    var downloaded = downloadHtml(window.__DATA__, "index.html");
-    if(downloaded){
-      alert("Saved. A file named index.html just downloaded — upload it to your GitHub repo (replacing the old one) so these photos go live for everyone. " +
-        (savedLocally ? "This browser will also keep showing your latest edits until you do." : ""));
-    } else if(savedLocally){
-      alert("Saved in this browser, but the automatic download did not start.");
-    } else {
-      alert("Could not save automatically. Your browser may be blocking local storage or downloads.");
-    }
   }
 
   /* ================= build overlay markup (once) ================= */
@@ -1503,32 +1479,20 @@ window.__DATA__ = {
           '<button class="btn-cancel" id="adminCancelBtn" type="button">Cancel</button>' +
           '<button class="btn-save" id="adminUnlockBtn" type="button">Unlock</button>' +
         '</div>' +
-      '</div>' +
-      /* admin mode bar */
-      '<div class="admin-bar" id="adminBar" hidden>' +
-        '<div class="wrap admin-bar-inner">' +
-          '<span>Admin mode — tap any product photo to upload</span>' +
-          '<div class="admin-bar-actions">' +
-            '<button type="button" class="mini-btn" id="openFullSettingsBtn">Full settings</button>' +
-            '<button type="button" class="btn-save" id="adminSaveBtn">Save &amp; download</button>' +
-            '<button type="button" class="btn-cancel" id="exitAdminBtn">Exit</button>' +
-          '</div>' +
-        '</div>' +
       '</div>';
     while(host.firstChild) document.body.appendChild(host.firstChild);
   }
 
   function wireOverlayEvents(){
-    document.getElementById("adminLoginBtn").addEventListener("click", openAdminModal);
+    document.getElementById("adminLoginBtn").addEventListener("click", function(){
+      if(adminMode){ openSettingsDrawer(); } else { openAdminModal(); }
+    });
     document.getElementById("adminCancelBtn").addEventListener("click", closeAdminModal);
     document.getElementById("adminBackdrop").addEventListener("click", closeAdminModal);
     document.getElementById("adminUnlockBtn").addEventListener("click", tryAdminUnlock);
     document.getElementById("adminPasswordInput").addEventListener("keydown", function(e){
       if(e.key === "Enter") tryAdminUnlock();
     });
-    document.getElementById("openFullSettingsBtn").addEventListener("click", openSettingsDrawer);
-    document.getElementById("adminSaveBtn").addEventListener("click", saveAdminChanges);
-    document.getElementById("exitAdminBtn").addEventListener("click", exitAdminMode);
 
     document.getElementById("closeCheckout").addEventListener("click", closeCheckout);
     document.getElementById("cancelCheckoutBtn").addEventListener("click", closeCheckout);
